@@ -1,0 +1,14 @@
+FROM node:18.17.0-alpine
+
+WORKDIR /frontend
+
+RUN npm install -g pnpm
+
+COPY . .
+
+RUN pnpm install
+RUN pnpm build
+
+EXPOSE 4173
+
+ENTRYPOINT ["pnpm", "run", "preview"]
