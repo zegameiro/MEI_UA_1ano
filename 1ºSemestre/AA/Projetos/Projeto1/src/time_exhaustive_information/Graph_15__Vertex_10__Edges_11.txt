@@ -1,0 +1,8 @@
+10_Nodes 11_Edges
+Cost: 5.1
+Sub Set A: ['d', 'h']
+Sub Set B: ['a', 'b', 'c', 'e', 'f', 'g', 'i', 'j']
+Adjency Matrix: [('a', ['d', 'c', 'e']), ('b', ['c']), ('c', ['j', 'f', 'b', 'a']), ('d', ['a', 'h']), ('e', ['j', 'g', 'f', 'a']), ('f', ['i', 'c', 'e']), ('g', ['e']), ('h', ['d']), ('i', ['f']), ('j', ['c', 'e'])]
+Elapsed Time: 0.9836840629577637s
+Basic Operations: 1022
+Number of Solutions: 1

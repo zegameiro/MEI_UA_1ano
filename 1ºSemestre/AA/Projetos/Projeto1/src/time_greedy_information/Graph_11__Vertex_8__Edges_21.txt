@@ -1,0 +1,8 @@
+8_Nodes 21_Edges
+Cost: 52.31
+Sub Set A: ['c']
+Sub Set B: ['a', 'b', 'd', 'e', 'f', 'g', 'h']
+Adjency Matrix: [('a', ['d', 'g', 'b', 'e', 'c']), ('b', ['d', 'e', 'h', 'a']), ('c', ['f', 'g', 'd', 'e', 'h', 'a']), ('d', ['h', 'f', 'b', 'g', 'c', 'a', 'e']), ('e', ['c', 'b', 'a', 'f', 'd', 'g']), ('f', ['c', 'd', 'g', 'e']), ('g', ['c', 'd', 'a', 'f', 'h', 'e']), ('h', ['d', 'c', 'b', 'g'])]
+Elapsed Time: 0.6552689075469971s
+Basic Operations: 2
+Number of Solutions: 0

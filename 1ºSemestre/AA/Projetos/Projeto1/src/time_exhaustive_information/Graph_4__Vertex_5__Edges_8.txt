@@ -1,0 +1,8 @@
+5_Nodes 8_Edges
+Cost: 17.060000000000002
+Sub Set A: ['a', 'b', 'c', 'd']
+Sub Set B: ['e']
+Adjency Matrix: [('a', ['c', 'd', 'b']), ('b', ['e', 'c', 'a']), ('c', ['d', 'a', 'b', 'e']), ('d', ['c', 'a', 'e']), ('e', ['b', 'c', 'd'])]
+Elapsed Time: 0.1975419521331787s
+Basic Operations: 30
+Number of Solutions: 1
