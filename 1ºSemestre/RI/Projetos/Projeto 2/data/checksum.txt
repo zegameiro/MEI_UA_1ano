@@ -1,0 +1,7 @@
+Checksums of the files, verify with md5sum to confirm that you have the last versions.
+
+Updated at 26/11/2024
+
+519e28f330eb6b20c63fab9b6f978c66  questions_bm25_ranked.jsonl
+7b3ecc910a74a0795632efb5f1226912  training_data_bm25_ranked.jsonl
+25a977349e047cfb9e62add40dbdd2f1  training_data.jsonl
