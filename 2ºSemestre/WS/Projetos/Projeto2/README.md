@@ -1,4 +1,4 @@
-# Segundo trabalho prático para a cadeira de Web Semântica
+# Segundo Projeto Prático para a cadeira de Web Semântica 2024/2025
 
 Este trabalho tem como objetivo dar continuidade ao desenvolvimento do sistema de informação semântico iniciado no TP1, aprofundando a sua complexidade e funcionalidades. Para isso, foi criado uma ontologia detalhada que descreve o domínio dos dados, permitindo classificações automáticas e a inferência de novas relações entre entidades. O sistema foi enriquecido com dados externos provenientes da DBpedia e da Wikidata, bem como pela publicação dos dados nas páginas web do próprio sistema. A implementaçãao recorre a tecnologias como Python/Django, GraphDB, SPARQL, RDF,OWL, Protégé, entre outras, promovendo uma forte integração entre os diferentes components e uma interface mais funcional para o utilizador.
 
