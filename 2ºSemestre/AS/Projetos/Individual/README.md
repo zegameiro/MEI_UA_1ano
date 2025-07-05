@@ -1,5 +1,7 @@
 # AS First Individual Assignment
 
+## Grade: 15.56
+
 ## Objective
 
 - Implement OpenTelemetry tracing on a single feature or use-case (end-to-end).
