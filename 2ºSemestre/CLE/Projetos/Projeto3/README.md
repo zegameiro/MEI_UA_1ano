@@ -2,6 +2,8 @@
 
 This assignment consists in the implementation of a solution for the Canny Edge Detection algorithm using CUDA. This algorithm detects edges in  grayscale images using a multi-stage process.
 
+## Grade: 16.60
+
 ---
 
 ## Table of Contents
