@@ -1,0 +1,1442 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+
+@prefix cel: <http://mydata.com/cel/> .
+@prefix celp: <http://mydata.com/celp/> .
+@prefix celc: <http://mydata.com/celc/> .
+
+celc:Celebrity rdf:type rdfs:Class .
+celc:Celebrity rdfs:subClassOf foaf:Person .
+
+celc:Relationship rdf:type rdfs:Class .
+celc:Relationship rdfs:subClassOf foaf:Group .
+
+celc:Famous rdf:type rdfs:Class .
+celc:Celebrity owl:equivalentClass celc:Famous .
+celc:Celebrity owl:disjointWith celc:Relationship .
+
+celp:inRelation rdf:type rdf:Property ;
+    owl:inverseOf celp:with ;
+    rdfs:domain celc:Celebrity ;
+    rdfs:range celc:Relationship .
+
+dc:title rdfs:subPropertyOf foaf:name .
+
+dc:title rdf:type rdf:Property ;
+    rdfs:domain celc:Celebrity ;
+    rdfs:range rdfs:Literal .
+
+celp:start rdfs:subPropertyOf celp:limit .
+celp:end rdfs:subPropertyOf celp:limit .
+
+celp:with rdf:type rdf:Property ;
+    rdfs:domain celc:Relationship ;
+    rdfs:range celc:Celebrity .
+
+celp:start rdf:type rdf:Property ;
+    rdfs:domain celc:Relationship ;
+    rdfs:range rdfs:Literal .
+
+celp:end rdf:type rdf:Property ;
+    rdfs:domain celc:Relationship ;
+    rdfs:range rdfs:Literal .
+
+cel:lenny_and_nicole celp:with cel:lenny_kravitz, cel:nicole_kidman .
+
+cel:conor_and_winona celp:with cel:conor_oberst, cel:winona_ryder .
+
+cel:michael_and_jennifer celp:with cel:michael_vartan, cel:jennifer_garner .
+
+cel:penelope_and_tom celp:with cel:penelope_cruz, cel:tom_cruise .
+
+cel:rick_and_paris celp:with cel:rick_salomon, cel:paris_hilton .
+
+cel:robert_and_charmaine celp:with cel:robert_de_niro, cel:charmaine_sinclair .
+
+cel:stephan_and_winona celp:with cel:winona_ryder, cel:stephan_jenkins .
+
+cel:katherine_and_joey celp:with cel:katherine_heigl, cel:joey_lawrence .
+
+cel:brody_and_lauren celp:with cel:brody_jenner, cel:lauren_conrad .
+
+cel:frederic_and_george celp:with cel:frederic_chopin, cel:george_sand .
+
+cel:tom_and_heidi celp:with cel:tom_sizemore, cel:heidi_fleiss .
+
+cel:warren_and_isabelle celp:with cel:warren_beatty, cel:isabelle_adjani .
+
+cel:henry_and_diane celp:with cel:henry_kissinger, cel:diane_sawyer .
+
+cel:chris_and_winona celp:with cel:winona_ryder, cel:chris_isaak, cel:chris_noth .
+
+cel:cameron_and_jared celp:with cel:cameron_diaz, cel:jared_leto .
+
+cel:leisha_and_k celp:with cel:leisha_hailey, cel:k_d_lang .
+
+cel:kristen_and_dax celp:with cel:kristen_bell, cel:dax_shepard .
+
+cel:guy_and_madonna celp:with cel:guy_ritchie, cel:madonna .
+
+cel:adam_and_mandy celp:with cel:mandy_moore, cel:adam_goldstein .
+
+cel:gina_and_owen celp:with cel:gina_gershon, cel:owen_wilson .
+
+cel:julie_and_warren celp:with cel:warren_beatty, cel:julie_christie .
+
+cel:scarlett_and_josh celp:with cel:scarlett_johansson, cel:josh_hartnett .
+
+cel:hayden_and_stephen celp:with cel:hayden_panettiere, cel:stephen_colletti .
+
+cel:jerry_and_shoshanna celp:with cel:jerry_seinfeld, cel:shoshanna_lonstein_gruss .
+
+cel:sean_and_jennifer celp:with cel:sean_combs, cel:jennifer_lopez .
+
+cel:ben_and_jeanne celp:with cel:ben_stiller, cel:jeanne_tripplehorn .
+
+cel:warren_and_joan celp:with cel:warren_beatty, cel:joan_collins .
+
+cel:howard_and_robin celp:with cel:howard_stern, cel:robin_givens .
+
+cel:hugh_and_holly celp:with cel:hugh_hefner, cel:holly_madison .
+
+cel:kate_and_rufus celp:with cel:kate_winslet, cel:rufus_sewell .
+
+cel:robert_and_gwyneth celp:with cel:gwyneth_paltrow, cel:robert_sean_leonard .
+
+cel:faye_and_warren celp:with cel:warren_beatty, cel:faye_dunaway .
+
+cel:reggie_and_kim celp:with cel:reggie_bush, cel:kim_kardashian .
+
+cel:dennis_and_madonna celp:with cel:madonna, cel:dennis_rodman .
+
+cel:jennifer_and_johnny celp:with cel:jennifer_grey, cel:johnny_depp .
+
+cel:julian_and_winona celp:with cel:winona_ryder, cel:julian_casablancas .
+
+cel:shar_and_kevin celp:with cel:kevin_federline, cel:shar_jackson .
+
+cel:mary-louise_and_billy celp:with cel:billy_crudup, cel:mary-louise_parker .
+
+cel:jenna_and_justin celp:with cel:jenna_dewan, cel:justin_timberlake .
+
+cel:kelly_and_charlie celp:with cel:kelly_preston, cel:charlie_sheen .
+
+cel:diane_and_woody celp:with cel:diane_keaton, cel:woody_allen .
+
+cel:winona_and_dave celp:with cel:winona_ryder, cel:dave_pirner .
+
+cel:ashlee_and_wilmer celp:with cel:ashlee_simpson, cel:wilmer_valderrama .
+
+cel:lindsay_and_aaron celp:with cel:lindsay_lohan, cel:aaron_carter .
+
+cel:paul_and_jennifer celp:with cel:paul_scolor, cel:jennifer_aniston .
+
+cel:mark_and_winona celp:with cel:winona_ryder, cel:mark_wahlberg .
+
+cel:rhett_and_winona celp:with cel:winona_ryder, cel:rhett_miller .
+
+cel:marc_and_jane celp:with cel:marc_singer, cel:jane_krakowski .
+
+cel:warren_and_janice celp:with cel:warren_beatty, cel:janice_dickinson .
+
+cel:brad_and_juliette celp:with cel:brad_pitt, cel:juliette_lewis .
+
+cel:kirsten_and_jake celp:with cel:kirsten_dunst, cel:jake_gyllenhaal .
+
+cel:ben_and_jennifer celp:with cel:jennifer_lopez, cel:ben_affleck .
+
+cel:brad_and_gwyneth celp:with cel:gwyneth_paltrow, cel:brad_pitt .
+
+cel:katherine_and_jason celp:with cel:katherine_heigl, cel:jason_behr .
+
+cel:brody_and_jayde celp:with cel:brody_jenner, cel:jayde_nicole .
+
+cel:hugh_and_claire celp:with cel:hugh_dancy, cel:claire_danes .
+
+cel:david_and_winona celp:with cel:winona_ryder, cel:david_duchovny .
+
+cel:mandy_and_wilmer celp:with cel:mandy_moore, cel:wilmer_valderrama .
+
+cel:stephan_and_charlize celp:with cel:stephan_jenkins, cel:charlize_theron .
+
+cel:matt_and_cameron celp:with cel:cameron_diaz, cel:matt_dillon .
+
+cel:kelly_and_pamela celp:with cel:kelly_slater, cel:pamela_anderson .
+
+cel:calista_and_ben celp:with cel:ben_stiller, cel:calista_flockhart .
+
+cel:brad_and_robin celp:with cel:robin_givens, cel:brad_pitt .
+
+cel:blake_and_penn celp:with cel:blake_lively, cel:penn_badgley .
+
+cel:sam_and_judith celp:with cel:sam_giancana, cel:judith_exner .
+
+cel:warren_and_madonna celp:with cel:warren_beatty, cel:madonna .
+
+cel:wilmer_and_jennifer celp:with cel:jennifer_love_hewitt, cel:wilmer_valderrama .
+
+cel:warren_and_leslie celp:with cel:warren_beatty, cel:leslie_caron .
+
+cel:flavio_and_heidi celp:with cel:heidi_klum, cel:flavio_briatore .
+
+cel:vanessa_and_Rob celp:with cel:vanessa_l_williams, cel:Rob_Mack .
+
+cel:gisele_and_leonardo celp:with cel:gisele_bundchen, cel:leonardo_dicaprio .
+
+cel:brooke_and_david celp:with cel:david_charvet, cel:brooke_burke .
+
+cel:howard_and_angie celp:with cel:howard_stern, cel:angie_everhart .
+
+cel:suze_and_bob celp:with cel:suze_rotolo, cel:bob_dylan .
+
+cel:del_and_keira celp:with cel:keira_knightley, cel:del_synnott .
+
+cel:shalane_and_brad celp:with cel:brad_pitt, cel:shalane_mccall .
+
+cel:justin_and_jessica celp:with cel:justin_timberlake, cel:jessica_biel .
+
+cel:kate_and_jamie celp:with cel:kate_moss, cel:jamie_hince .
+
+cel:nicole_and_robbie celp:with cel:nicole_kidman, cel:robbie_williams .
+
+cel:gisele_and_kelly celp:with cel:gisele_bundchen, cel:kelly_slater .
+
+cel:adam_and_nicole celp:with cel:adam_goldstein, cel:nicole_richie .
+
+cel:sarah_and_robert celp:with cel:sarah_jessica_parker, cel:robert_downey_jr .
+
+cel:michael_and_stephanie celp:with cel:stephanie_rice, cel:michael_phelps .
+
+cel:ashlee_and_josh celp:with cel:ashlee_simpson, cel:josh_henderson .
+
+cel:paul_and_winona celp:with cel:winona_ryder, cel:paul_westerberg .
+
+cel:katie_and_tom celp:with cel:katie_couric, cel:tom_werner .
+
+cel:mandy_and_billy celp:with cel:mandy_moore, cel:billy_crawford .
+
+cel:tony_and_gwen celp:with cel:gwen_stefani, cel:tony_kanal .
+
+cel:stuart_and_charlize celp:with cel:stuart_townsend, cel:charlize_theron .
+
+cel:jane_and_warren celp:with cel:warren_beatty, cel:jane_fonda .
+
+cel:beck_and_winona celp:with cel:winona_ryder, cel:beck .
+
+cel:jules_and_george celp:with cel:george_sand, cel:jules_sandeau .
+
+cel:emma_and_bruce celp:with cel:emma_heming, cel:bruce_willis .
+
+cel:jenny_and_angelina celp:with cel:jenny_shimizu, cel:angelina_jolie .
+
+cel:kate_and_billy celp:with cel:billy_zane, cel:kate_moss .
+
+cel:tre_and_winona celp:with cel:winona_ryder, cel:tre_cool .
+
+cel:misty_and_john celp:with cel:john_holmes_1944, cel:misty_dawn .
+
+cel:brad_and_jill celp:with cel:brad_pitt, cel:jill_schoelen .
+
+cel:joaquin_and_liv celp:with cel:joaquin_phoenix, cel:liv_tyler .
+
+cel:uma_and_robert celp:with cel:robert_de_niro, cel:uma_thurman .
+
+cel:christian_and_winona celp:with cel:winona_ryder, cel:christian_slater .
+
+cel:john_and_madonna celp:with cel:john_benitez, cel:madonna .
+
+cel:shana_and_ryan celp:with cel:shana_wall, cel:ryan_seacrest .
+
+cel:sheryl_and_lance celp:with cel:sheryl_crow, cel:lance_armstrong .
+
+cel:rupert_and_keira celp:with cel:keira_knightley, cel:rupert_friend .
+
+cel:winona_and_johnny celp:with cel:winona_ryder, cel:johnny_depp .
+
+cel:jenny_and_jim celp:with cel:jenny_mccarthy, cel:jim_carrey .
+
+cel:ashlee_and_gregory celp:with cel:ashlee_simpson, cel:gregory_smith .
+
+cel:ben_and_gwyneth celp:with cel:gwyneth_paltrow, cel:ben_affleck .
+
+cel:reese_and_jake celp:with cel:jake_gyllenhaal, cel:reese_witherspoon .
+
+cel:adam_and_winona celp:with cel:winona_ryder, cel:adam_duritz .
+
+cel:tom_and_cher celp:with cel:tom_cruise, cel:cher .
+
+cel:tyra_and_chris celp:with cel:tyra_banks, cel:chris_webber .
+
+cel:maria_and_bruce celp:with cel:maria_rosado, cel:bruce_willis .
+
+cel:jenny_and_jake celp:with cel:jake_gyllenhaal, cel:jenny_lewis .
+
+cel:seka_and_john celp:with cel:seka, cel:john_holmes_1944 .
+
+cel:dave_and_winona celp:with cel:winona_ryder, cel:dave_grohl .
+
+cel:katie_and_carrol celp:with cel:katie_couric, cel:carrol_lesesne .
+
+cel:devendra_and_natalie celp:with cel:devendra_banhart, cel:natalie_portman .
+
+cel:greg_and_mandy celp:with cel:mandy_moore, cel:greg_laswell .
+
+cel:alfred_and_george celp:with cel:alfred_de_musset, cel:george_sand .
+
+cel:nicole_and_joel celp:with cel:nicole_richie, cel:joel_madden .
+
+cel:diana_and_james celp:with cel:diana_princess_of_wales, cel:james_hewitt .
+
+cel:niki_and_keith celp:with cel:keith_urban, cel:niki_taylor .
+
+cel:frank_and_diane celp:with cel:diane_sawyer, cel:frank_gannon .
+
+cel:mariah_and_luis celp:with cel:mariah_carey, cel:luis_miguel .
+
+cel:john_and_jessica celp:with cel:jessica_simpson, cel:john_mayer .
+
+cel:tito_and_jenna celp:with cel:jenna_jameson, cel:tito_ortiz .
+
+cel:vanilla_and_madonna celp:with cel:madonna, cel:vanilla_ice .
+
+cel:jerry_and_carol celp:with cel:jerry_seinfeld, cel:carol_leifer .
+
+cel:britney_and_fred celp:with cel:britney_spears, cel:fred_durst .
+
+cel:john_and_jennifer celp:with cel:jennifer_love_hewitt, cel:jennifer_aniston, cel:john_mayer .
+
+cel:tamara_and_bruce celp:with cel:bruce_willis, cel:tamara_witmer .
+
+cel:kate_and_stephen celp:with cel:kate_winslet, cel:stephen_tredre .
+
+cel:amanda_and_ben celp:with cel:ben_stiller, cel:amanda_peet .
+
+cel:tony_and_madonna celp:with cel:madonna, cel:tony_ward .
+
+cel:orlando_and_jennifer celp:with cel:jennifer_aniston, cel:orlando_bloom .
+
+cel:john_and_gina celp:with cel:gina_gershon, cel:john_cusack .
+
+cel:john_and_desiree celp:with cel:john_holmes_1944, cel:desiree_cousteau .
+
+cel:warren_and_britt celp:with cel:warren_beatty, cel:britt_ekland .
+
+cel:tom_and_bridget celp:with cel:tom_brady, cel:bridget_moynahan .
+
+cel:jack_and_winona celp:with cel:winona_ryder, cel:jack_white .
+
+cel:eliot_and_Ashley celp:with cel:Ashley_Alexandra_Dupre, cel:eliot_spitzer .
+
+cel:gisele_and_tom celp:with cel:gisele_bundchen, cel:tom_brady .
+
+cel:jakob_and_winona celp:with cel:winona_ryder, cel:jakob_dylan .
+
+cel:carlos_and_madonna celp:with cel:madonna, cel:carlos_leon .
+
+cel:kate_and_lance celp:with cel:lance_armstrong, cel:kate_hudson .
+
+cel:michael_and_Caroline celp:with cel:Caroline_Pal, cel:michael_phelps .
+
+cel:justin_and_alyssa celp:with cel:justin_timberlake, cel:alyssa_milano .
+
+cel:john_and_juliet celp:with cel:juliet_anderson, cel:john_holmes_1944 .
+
+cel:jeffrey_and_mary-louise celp:with cel:mary-louise_parker, cel:jeffrey_dean_morgan .
+
+cel:zach_and_mandy celp:with cel:mandy_moore, cel:zach_braff .
+
+cel:hugh_and_emma celp:with cel:hugh_laurie, cel:emma_thompson .
+
+cel:brooke_and_bruce celp:with cel:brooke_burns, cel:bruce_willis .
+
+cel:sherilyn_and_johnny celp:with cel:johnny_depp, cel:sherilyn_fenn .
+
+cel:michael_and_carrie celp:with cel:michael_phelps, cel:carrie_underwood .
+
+cel:christina_and_20044548 celp:with cel:20044548, cel:christina_ricci .
+
+cel:lindsay_and_samantha celp:with cel:lindsay_lohan, cel:samantha_ronson .
+
+cel:heidi_and_anthony celp:with cel:heidi_klum, cel:anthony_kiedis .
+
+cel:tate_and_jennifer celp:with cel:jennifer_aniston, cel:tate_donovan .
+
+cel:hayden_and_milo celp:with cel:hayden_panettiere, cel:milo_ventimiglia .
+
+cel:mario_and_kate celp:with cel:mario_sorrenti, cel:kate_moss .
+
+cel:hugh_and_kendra celp:with cel:hugh_hefner, cel:kendra_wilkinson .
+
+cel:miley_and_nick celp:with cel:miley_cyrus, cel:nick_jonas .
+
+cel:brad_and_thandie celp:with cel:thandie_newton, cel:brad_pitt .
+
+cel:catherine_and_warren celp:with cel:warren_beatty, cel:catherine_deneuve .
+
+cel:kate_and_owen celp:with cel:owen_wilson, cel:kate_hudson .
+
+cel:pamela_and_marcus celp:with cel:marcus_schenkenberg, cel:pamela_anderson .
+
+cel:kate_and_johnny celp:with cel:johnny_depp, cel:kate_moss .
+
+cel:helena_and_kenneth celp:with cel:helena_bonham_carter, cel:kenneth_branagh .
+
+cel:warren_and_candice celp:with cel:warren_beatty, cel:candice_bergen .
+
+cel:paula_and_charlie celp:with cel:charlie_sheen, cel:paula_profit .
+
+cel:gwyneth_and_christopher celp:with cel:gwyneth_paltrow, cel:christopher_heinz .
+
+cel:jennifer_and_vince celp:with cel:jennifer_aniston, cel:vince_vaughn .
+
+cel:kate_and_peter celp:with cel:kate_moss, cel:peter_doherty_1913 .
+
+cel:paul_and_amy celp:with cel:paul_dinello, cel:amy_sedaris .
+
+cel:frank_and_judith celp:with cel:judith_exner, cel:frank_sinatra .
+
+cel:katie_and_chris celp:with cel:katie_couric, cel:chris_botti .
+
+cel:warren_and_carly celp:with cel:warren_beatty, cel:carly_simon .
+
+cel:matt_and_odessa celp:with cel:matt_damon, cel:odessa_whitmire .
+
+cel:uma_and_nicolas celp:with cel:nicolas_cage, cel:uma_thurman .
+
+cel:claire_and_billy celp:with cel:billy_crudup, cel:claire_danes .
+
+cel:luke_and_gwyneth celp:with cel:gwyneth_paltrow, cel:luke_wilson .
+
+cel:justin_and_britney celp:with cel:justin_timberlake, cel:britney_spears .
+
+cel:ashlee_and_ryan celp:with cel:ashlee_simpson, cel:ryan_cabrera .
+
+cel:nicole_and_brody celp:with cel:brody_jenner, cel:nicole_richie .
+
+cel:mia_and_woody celp:with cel:woody_allen, cel:mia_farrow .
+
+cel:evan_and_winona celp:with cel:winona_ryder, cel:evan_dando .
+
+cel:serena_and_brett celp:with cel:serena_williams, cel:brett_ratner .
+
+cel:john_and_minka celp:with cel:john_mayer, cel:minka_kelly .
+
+cel:halle_and_gabriel celp:with cel:gabriel_aubry, cel:halle_berry .
+
+cel:robert_and_toukie celp:with cel:robert_de_niro, cel:toukie_smith .
+
+cel:hank_and_kendra celp:with cel:hank_baskett, cel:kendra_wilkinson .
+
+cel:mark_and_madonna celp:with cel:madonna, cel:mark_kamins .
+
+cel:karen_and_bruce celp:with cel:karen_mcdougal, cel:bruce_willis .
+
+cel:katie_and_jimmy celp:with cel:katie_couric, cel:jimmy_reyes .
+
+cel:john_and_tyra celp:with cel:john_singleton, cel:tyra_banks .
+
+cel:joan_and_bob celp:with cel:bob_dylan, cel:joan_baez .
+
+cel:winona_and_pete celp:with cel:winona_ryder, cel:pete_yorn .
+
+cel:ben_and_claire celp:with cel:claire_danes, cel:ben_lee .
+
+cel:elton_and_david celp:with cel:elton_john, cel:david_furnish .
+
+cel:sarah_and_john celp:with cel:john_f_kennedy_jr, cel:sarah_jessica_parker .
+
+cel:ray_and_kim celp:with cel:kim_kardashian, cel:ray_j .
+
+cel:jean-michel_and_madonna celp:with cel:madonna, cel:jean-michel_basquiat .
+
+cel:matt_and_winona celp:with cel:winona_ryder, cel:matt_damon .
+
+cel:john_and_judith celp:with cel:judith_exner, cel:john_f_kennedy .
+
+cel:george_and_eva celp:with cel:eva_mendes, cel:george_gargurevich .
+
+cel:vanessa_and_zac celp:with cel:vanessa_anne_hudgens, cel:zac_efron .
+
+cel:ashlee_and_chris celp:with cel:ashlee_simpson, cel:chris_raab .
+
+cel:stacey_and_woody celp:with cel:woody_allen, cel:stacey_nelkin .
+
+cel:soon-yi_and_woody celp:with cel:soon-yi_previn, cel:woody_allen .
+
+cel:winona_and_jason celp:with cel:winona_ryder, cel:jason_kay .
+
+cel:mandy_and_andy celp:with cel:mandy_moore, cel:andy_roddick .
+
+cel:matt_and_minnie celp:with cel:matt_damon, cel:minnie_driver .
+
+cel:emily_and_bruce celp:with cel:emily_sandberg, cel:bruce_willis .
+
+cel:simon_and_terri celp:with cel:terri_seymour, cel:simon_cowell .
+
+cel:madonna_and_sean celp:with cel:madonna, cel:sean_penn .
+
+cel:serena_and_common celp:with cel:common, cel:serena_williams .
+
+cel:sarah_and_joshua celp:with cel:sarah_jessica_parker, cel:joshua_kadison .
+
+cel:jennifer_and_adam celp:with cel:jennifer_aniston, cel:adam_duritz .
+
+cel:ryan_and_winona celp:with cel:winona_ryder, cel:ryan_adams .
+
+cel:rich_and_jennifer celp:with cel:jennifer_love_hewitt, cel:rich_cronin .
+
+cel:robert_and_leigh celp:with cel:robert_de_niro, cel:leigh_taylor-young .
+
+cel:cameron_and_justin celp:with cel:cameron_diaz, cel:justin_timberlake .
+
+cel:adam_and_christina celp:with cel:christina_ricci, cel:adam_goldberg .
+
+cel:marilyn_and_john celp:with cel:marilyn_monroe, cel:john_f_kennedy .
+
+cel:jason_and_lauren celp:with cel:lauren_conrad, cel:jason_wahler .
+
+cel:elizabeth_and_nicolas celp:with cel:nicolas_cage, cel:elizabeth_daily .
+
+cel:jefferson_and_kate celp:with cel:kate_moss, cel:jefferson_hack .
+
+cel:ben_and_janeane celp:with cel:ben_stiller, cel:janeane_garofalo .
+
+cel:blake_and_winona celp:with cel:winona_ryder, cel:blake_sennett .
+
+cel:keira_and_jamie celp:with cel:keira_knightley, cel:jamie_dornan .
+
+cel:wilmer_and_lindsay celp:with cel:wilmer_valderrama, cel:lindsay_lohan .
+
+cel:pamela_and_bret celp:with cel:pamela_anderson, cel:bret_michaels .
+
+cel:brad_and_sinitta celp:with cel:brad_pitt, cel:sinitta_malone .
+
+cel:mandy_and_ryan celp:with cel:mandy_moore, cel:ryan_adams .
+
+cel:ashlee_and_braxton celp:with cel:ashlee_simpson, cel:braxton_olita .
+
+cel:john_and_candy celp:with cel:john_holmes_1944, cel:candy_samples .
+
+cel:kristen_and_kevin celp:with cel:kristen_bell, cel:kevin_mann .
+
+cel:jay-z_and_beyonce celp:with cel:beyonce, cel:jay-z .
+
+cel:carrie_and_chace celp:with cel:chace_crawford, cel:carrie_underwood .
+
+cel:lenny_and_nicole celp:end "2004" .
+
+cel:conor_and_winona celp:end "1996" .
+
+cel:penelope_and_tom celp:end "2004" .
+
+cel:robert_and_charmaine celp:end "1995" .
+
+cel:frederic_and_george celp:end "1847" .
+
+cel:chris_and_winona celp:end "2000" .
+
+cel:cameron_and_jared celp:end "2002" .
+
+cel:scarlett_and_josh celp:end "2006" .
+
+cel:sean_and_jennifer celp:end "1999-12" .
+
+cel:kate_and_rufus celp:end "1998" .
+
+cel:jennifer_and_johnny celp:end "1989" .
+
+cel:mary-louise_and_billy celp:end "2003-11" .
+
+cel:diane_and_woody celp:end "1979" .
+
+cel:winona_and_dave celp:end "1996" .
+
+cel:ben_and_jennifer celp:end "2004-01" .
+
+cel:mandy_and_wilmer celp:end "2002" .
+
+cel:stephan_and_charlize celp:end "2001" .
+
+cel:matt_and_cameron celp:end "1998" .
+
+cel:wilmer_and_jennifer celp:end "1999" .
+
+cel:gisele_and_leonardo celp:end "2005" .
+
+cel:shalane_and_brad celp:end "1988" .
+
+cel:kate_and_jamie celp:end "2008-07" .
+
+cel:adam_and_nicole celp:end "2005" .
+
+cel:sarah_and_robert celp:end "1991" .
+
+cel:katie_and_tom celp:end "2004" .
+
+cel:joaquin_and_liv celp:end "1998" .
+
+cel:uma_and_robert celp:end "1993" .
+
+cel:christian_and_winona celp:end "1990" .
+
+cel:shana_and_ryan celp:end "2005" .
+
+cel:sheryl_and_lance celp:end "2006-02" .
+
+cel:winona_and_johnny celp:end "1993" .
+
+cel:tom_and_cher celp:end "1986" .
+
+cel:jenny_and_jake celp:end "2001" .
+
+cel:katie_and_carrol celp:end "2000" .
+
+cel:alfred_and_george celp:end "1834" .
+
+cel:niki_and_keith celp:end "2004" .
+
+cel:kate_and_stephen celp:end "1995" .
+
+cel:tom_and_bridget celp:end "2006" .
+
+cel:jeffrey_and_mary-louise celp:end "2008-03" .
+
+cel:zach_and_mandy celp:end "2006" .
+
+cel:brooke_and_bruce celp:end "2004" .
+
+cel:sherilyn_and_johnny celp:end "1989" .
+
+cel:miley_and_nick celp:end "2007" .
+
+cel:kate_and_johnny celp:end "1998" .
+
+cel:helena_and_kenneth celp:end "1999" .
+
+cel:gwyneth_and_christopher celp:end "2001" .
+
+cel:kate_and_peter celp:end "2007-07" .
+
+cel:matt_and_odessa celp:end "2003" .
+
+cel:claire_and_billy celp:end "2006-12" .
+
+cel:justin_and_britney celp:end "2002" .
+
+cel:mia_and_woody celp:end "1992" .
+
+cel:robert_and_toukie celp:end "1991" .
+
+cel:ben_and_claire celp:end "2003" .
+
+cel:matt_and_winona celp:end "2000" .
+
+cel:john_and_judith celp:end "1962" .
+
+cel:mandy_and_andy celp:end "2004" .
+
+cel:simon_and_terri celp:end "2006" .
+
+cel:rich_and_jennifer celp:end "2001" .
+
+cel:robert_and_leigh celp:end "1974" .
+
+cel:cameron_and_justin celp:end "2007-01-11" .
+
+cel:jason_and_lauren celp:end "2006-08-09" .
+
+cel:kristen_and_kevin celp:end "2007" .
+
+cel:lenny_and_nicole celp:start "2003" .
+
+cel:penelope_and_tom celp:start "2001" .
+
+cel:robert_and_charmaine celp:start "1993" .
+
+cel:katherine_and_joey celp:start "1994" .
+
+cel:frederic_and_george celp:start "1837" .
+
+cel:chris_and_winona celp:start "2000" .
+
+cel:cameron_and_jared celp:start "1998" .
+
+cel:scarlett_and_josh celp:start "2004" .
+
+cel:sean_and_jennifer celp:start "1997-08" .
+
+cel:kate_and_rufus celp:start "1996" .
+
+cel:robert_and_gwyneth celp:start "2001" .
+
+cel:jennifer_and_johnny celp:start "1989" .
+
+cel:mary-louise_and_billy celp:start "1996" .
+
+cel:jenna_and_justin celp:start "2002" .
+
+cel:diane_and_woody celp:start "1970" .
+
+cel:winona_and_dave celp:start "1993" .
+
+cel:kirsten_and_jake celp:start "2002-09" .
+
+cel:brad_and_gwyneth celp:start "1996-12-20" .
+
+cel:hugh_and_claire celp:start "2006-12" .
+
+cel:mandy_and_wilmer celp:start "2000" .
+
+cel:stephan_and_charlize celp:start "1998" .
+
+cel:matt_and_cameron celp:start "1995" .
+
+cel:brad_and_robin celp:start "1989" .
+
+cel:wilmer_and_jennifer celp:start "1999" .
+
+cel:vanessa_and_Rob celp:start "2006" .
+
+cel:gisele_and_leonardo celp:start "2002" .
+
+cel:shalane_and_brad celp:start "1987" .
+
+cel:justin_and_jessica celp:start "2007-01" .
+
+cel:nicole_and_robbie celp:start "2004" .
+
+cel:adam_and_nicole celp:start "2003" .
+
+cel:sarah_and_robert celp:start "1984" .
+
+cel:katie_and_tom celp:start "2000" .
+
+cel:stuart_and_charlize celp:start "2001" .
+
+cel:jules_and_george celp:start "1831" .
+
+cel:kate_and_billy celp:start "1999" .
+
+cel:joaquin_and_liv celp:start "1995" .
+
+cel:uma_and_robert celp:start "1992" .
+
+cel:christian_and_winona celp:start "1989" .
+
+cel:shana_and_ryan celp:start "2003" .
+
+cel:winona_and_johnny celp:start "1990" .
+
+cel:jenny_and_jim celp:start "2005-12" .
+
+cel:reese_and_jake celp:start "2007" .
+
+cel:tom_and_cher celp:start "1983" .
+
+cel:jenny_and_jake celp:start "2001" .
+
+cel:katie_and_carrol celp:start "1999" .
+
+cel:alfred_and_george celp:start "1833" .
+
+cel:nicole_and_joel celp:start "2007-03" .
+
+cel:niki_and_keith celp:start "2002" .
+
+cel:britney_and_fred celp:start "2003" .
+
+cel:kate_and_stephen celp:start "1990" .
+
+cel:tom_and_bridget celp:start "2004" .
+
+cel:gisele_and_tom celp:start "2006" .
+
+cel:kate_and_lance celp:start "2008" .
+
+cel:justin_and_alyssa celp:start "2002-09" .
+
+cel:jeffrey_and_mary-louise celp:start "2006" .
+
+cel:zach_and_mandy celp:start "2004" .
+
+cel:sherilyn_and_johnny celp:start "1985" .
+
+cel:kate_and_johnny celp:start "1994" .
+
+cel:helena_and_kenneth celp:start "1994" .
+
+cel:gwyneth_and_christopher celp:start "2000" .
+
+cel:kate_and_peter celp:start "2005-09" .
+
+cel:katie_and_chris celp:start "2005" .
+
+cel:matt_and_odessa celp:start "2001" .
+
+cel:claire_and_billy celp:start "2004" .
+
+cel:justin_and_britney celp:start "1998" .
+
+cel:mia_and_woody celp:start "1980" .
+
+cel:halle_and_gabriel celp:start "2005-11" .
+
+cel:robert_and_toukie celp:start "1990" .
+
+cel:hank_and_kendra celp:start "2008-11-01" .
+
+cel:katie_and_jimmy celp:start "2006" .
+
+cel:ben_and_claire celp:start "1998" .
+
+cel:elton_and_david celp:start "2005-12-21" .
+
+cel:matt_and_winona celp:start "1996" .
+
+cel:george_and_eva celp:start "2002" .
+
+cel:vanessa_and_zac celp:start "2008-07-19" .
+
+cel:soon-yi_and_woody celp:start "1990" .
+
+cel:mandy_and_andy celp:start "2002" .
+
+cel:simon_and_terri celp:start "2002" .
+
+cel:rich_and_jennifer celp:start "1999" .
+
+cel:robert_and_leigh celp:start "1970" .
+
+cel:cameron_and_justin celp:start "2003" .
+
+cel:blake_and_winona celp:start "2007" .
+
+cel:kristen_and_kevin celp:start "2002" .
+
+cel:jay-z_and_beyonce celp:start "2002" .
+
+cel:carrie_and_chace celp:start "2007-08" .
+
+cel:lenny_kravitz dc:title "Lenny Kravitz" .
+
+cel:nicole_kidman dc:title "Nicole Kidman" .
+
+cel:john_f_kennedy_jr dc:title "John F. Kennedy, Jr." .
+
+cel:conor_oberst dc:title "Conor Oberst" .
+
+cel:winona_ryder dc:title "Winona Ryder" .
+
+cel:john_benitez dc:title "John Benitez" .
+
+cel:michael_vartan dc:title "Michael Vartan" .
+
+cel:jennifer_garner dc:title "Jennifer Garner" .
+
+cel:penelope_cruz dc:title "Penélope Cruz" .
+
+cel:tom_cruise dc:title "Tom Cruise" .
+
+cel:rick_salomon dc:title "Rick Salomon" .
+
+cel:paris_hilton dc:title "Paris Hilton" .
+
+cel:gisele_bundchen dc:title "Gisele Bündchen" .
+
+cel:evan_dando dc:title "Evan Dando" .
+
+cel:robert_de_niro dc:title "Robert De Niro" .
+
+cel:charmaine_sinclair dc:title "Charmaine Sinclair" .
+
+cel:mandy_moore dc:title "Mandy Moore" .
+
+cel:stephan_jenkins dc:title "Stephan Jenkins" .
+
+cel:katherine_heigl dc:title "Katherine Heigl" .
+
+cel:joey_lawrence dc:title "Joey Lawrence" .
+
+cel:keira_knightley dc:title "Keira Knightley" .
+
+cel:vanessa_l_williams dc:title "Vanessa L. Williams" .
+
+cel:alfred_de_musset dc:title "Alfred de Musset" .
+
+cel:brody_jenner dc:title "Brody Jenner" .
+
+cel:lauren_conrad dc:title "Lauren Conrad" .
+
+cel:frederic_chopin dc:title "Frédéric Chopin" .
+
+cel:george_sand dc:title "George Sand" .
+
+cel:tom_sizemore dc:title "Tom Sizemore" .
+
+cel:heidi_fleiss dc:title "Heidi Fleiss" .
+
+cel:warren_beatty dc:title "Warren Beatty" .
+
+cel:isabelle_adjani dc:title "Isabelle Adjani" .
+
+cel:henry_kissinger dc:title "Henry Kissinger" .
+
+cel:diane_sawyer dc:title "Diane Sawyer" .
+
+cel:chris_isaak dc:title "Chris Isaak" .
+
+cel:cameron_diaz dc:title "Cameron Diaz" .
+
+cel:jared_leto dc:title "Jared Leto" .
+
+cel:leisha_hailey dc:title "Leisha Hailey" .
+
+cel:k_d_lang dc:title "k.d. lang" .
+
+cel:kristen_bell dc:title "Kristen Bell" .
+
+cel:dax_shepard dc:title "Dax Shepard" .
+
+cel:chace_crawford dc:title "Chace Crawford" .
+
+cel:guy_ritchie dc:title "Guy Ritchie" .
+
+cel:madonna dc:title "Madonna" .
+
+cel:adam_goldstein dc:title "Adam Goldstein" .
+
+cel:gwyneth_paltrow dc:title "Gwyneth Paltrow" .
+
+cel:john_mayer dc:title "John Mayer" .
+
+cel:nicolas_cage dc:title "Nicolas Cage" .
+
+cel:soon-yi_previn dc:title "Soon-Yi Previn" .
+
+cel:gina_gershon dc:title "Gina Gershon" .
+
+cel:owen_wilson dc:title "Owen Wilson" .
+
+cel:gabriel_aubry dc:title "Gabriel Aubry" .
+
+cel:diane_keaton dc:title "Diane Keaton" .
+
+cel:juliet_anderson dc:title "Juliet Anderson" .
+
+cel:julie_christie dc:title "Julie Christie" .
+
+cel:scarlett_johansson dc:title "Scarlett Johansson" .
+
+cel:josh_hartnett dc:title "Josh Hartnett" .
+
+cel:Ashley_Alexandra_Dupre dc:title "Ashley Alexandra Dupré" .
+
+cel:del_synnott dc:title "Del Synnott" .
+
+cel:hayden_panettiere dc:title "Hayden Panettiere" .
+
+cel:stephen_colletti dc:title "Stephen Colletti" .
+
+cel:kevin_federline dc:title "Kevin Federline" .
+
+cel:david_charvet dc:title "David Charvet" .
+
+cel:robert_sean_leonard dc:title "Robert Sean Leonard" .
+
+cel:seka dc:title "Seka" .
+
+cel:diana_princess_of_wales dc:title "Diana, Princess of Wales" .
+
+cel:jerry_seinfeld dc:title "Jerry Seinfeld" .
+
+cel:shoshanna_lonstein_gruss dc:title "Shoshanna Lonstein Gruss" .
+
+cel:sean_combs dc:title "Sean Combs" .
+
+cel:jennifer_lopez dc:title "Jennifer Lopez" .
+
+cel:terri_seymour dc:title "Terri Seymour" .
+
+cel:marilyn_monroe dc:title "Marilyn Monroe" .
+
+cel:ben_stiller dc:title "Ben Stiller" .
+
+cel:jeanne_tripplehorn dc:title "Jeanne Tripplehorn" .
+
+cel:eva_mendes dc:title "Eva Mendes" .
+
+cel:heidi_klum dc:title "Heidi Klum" .
+
+cel:jack_white dc:title "John Anthony Gillis" .
+
+cel:mario_sorrenti dc:title "Mario Sorrenti" .
+
+cel:common dc:title "Common" .
+
+cel:joan_collins dc:title "Joan Collins" .
+
+cel:blake_lively dc:title "Blake Lively" .
+
+cel:howard_stern dc:title "Howard Stern" .
+
+cel:robin_givens dc:title "Robin Givens" .
+
+cel:toukie_smith dc:title "Toukie Smith" .
+
+cel:hugh_hefner dc:title "Hugh Hefner" .
+
+cel:holly_madison dc:title "Holly Madison" .
+
+cel:sean_penn dc:title "Sean Penn" .
+
+cel:kate_winslet dc:title "Kate Winslet" .
+
+cel:rufus_sewell dc:title "Rufus Sewell" .
+
+cel:janeane_garofalo dc:title "Janeane Garofalo" .
+
+cel:kevin_mann dc:title "Kevin Mann" .
+
+cel:faye_dunaway dc:title "Faye Dunaway" .
+
+cel:hank_baskett dc:title "Hank Baskett" .
+
+cel:Rob_Mack dc:title "Rob Mack" .
+
+cel:billy_crawford dc:title "Billy Crawford" .
+
+cel:keith_urban dc:title "Keith Urban" .
+
+cel:reggie_bush dc:title "Reggie Bush" .
+
+cel:kim_kardashian dc:title "Kim Kardashian" .
+
+cel:dennis_rodman dc:title "Dennis Rodman" .
+
+cel:brooke_burns dc:title "Brooke Burns" .
+
+cel:tre_cool dc:title "Tré Cool" .
+
+cel:jennifer_grey dc:title "Jennifer Grey" .
+
+cel:johnny_depp dc:title "Johnny Depp" .
+
+cel:billy_crudup dc:title "Billy Crudup" .
+
+cel:stuart_townsend dc:title "Stuart Townsend" .
+
+cel:Caroline_Pal dc:title "Caroline Pal" .
+
+cel:sheryl_crow dc:title "Sheryl Crow" .
+
+cel:elton_john dc:title "Elton John" .
+
+cel:elizabeth_daily dc:title "Elizabeth Daily" .
+
+cel:julian_casablancas dc:title "Julian Casablancas" .
+
+cel:jennifer_love_hewitt dc:title "Jennifer Love Hewitt" .
+
+cel:christopher_heinz dc:title "Christopher Heinz" .
+
+cel:shar_jackson dc:title "Shar Jackson" .
+
+cel:vanessa_anne_hudgens dc:title "Vanessa Anne Hudgens" .
+
+cel:emily_sandberg dc:title "Emily Sandberg" .
+
+cel:mary-louise_parker dc:title "Mary-Louise Parker" .
+
+cel:maria_rosado dc:title "Maria Bravo Rosado" .
+
+cel:calista_flockhart dc:title "Calista Flockhart" .
+
+cel:ashlee_simpson dc:title "Ashlee Simpson" .
+
+cel:katie_couric dc:title "Katie Couric" .
+
+cel:sam_giancana dc:title "Sam Giancana" .
+
+cel:jenna_dewan dc:title "Jenna Dewan" .
+
+cel:justin_timberlake dc:title "Justin Timberlake" .
+
+cel:kelly_preston dc:title "Kelly Preston" .
+
+cel:charlie_sheen dc:title "Charlie Sheen" .
+
+cel:carroll_lesesne dc:title "Carroll Lesesne" .
+
+cel:anthony_kiedis dc:title "Anthony Kiedis" .
+
+cel:wilmer_valderrama dc:title "Wilmer Valderrama" .
+
+cel:thandie_newton dc:title "Thandie Newton" .
+
+cel:marcus_schenkenberg dc:title "Marcus Schenkenberg" .
+
+cel:woody_allen dc:title "Woody Allen" .
+
+cel:john_holmes_1944 dc:title "John Holmes" .
+
+cel:dave_pirner dc:title "Dave Pirner" .
+
+cel:billy_zane dc:title "Billy Zane" .
+
+cel:karen_mcdougal dc:title "Karen McDougal" .
+
+cel:lindsay_lohan dc:title "Lindsay Lohan" .
+
+cel:aaron_carter dc:title "Aaron Carter" .
+
+cel:jennifer_aniston dc:title "Jennifer Aniston" .
+
+cel:mark_wahlberg dc:title "Mark Wahlberg" .
+
+cel:stephanie_rice dc:title "Stephanie Rice" .
+
+cel:rhett_miller dc:title "Rhett Miller" .
+
+cel:marc_singer dc:title "Marc Singer" .
+
+cel:jane_krakowski dc:title "Jane Krakowski" .
+
+cel:janice_dickinson dc:title "Janice Dickinson" .
+
+cel:serena_williams dc:title "Serena Williams" .
+
+cel:brad_pitt dc:title "Brad Pitt" .
+
+cel:juliette_lewis dc:title "Juliette Lewis" .
+
+cel:kirsten_dunst dc:title "Kirsten Dunst" .
+
+cel:jake_gyllenhaal dc:title "Jake Gyllenhaal" .
+
+cel:ben_affleck dc:title "Ben Affleck" .
+
+cel:charlize_theron dc:title "Charlize Theron" .
+
+cel:rupert_friend dc:title "Rupert Friend" .
+
+cel:jason_behr dc:title "Jason Behr" .
+
+cel:jayde_nicole dc:title "Jayde Nicole" .
+
+cel:hadrian dc:title "Hadrian" .
+
+cel:hugh_dancy dc:title "Hugh Dancy" .
+
+cel:claire_danes dc:title "Claire Danes" .
+
+cel:gwen_stefani dc:title "Gwen Stefani" .
+
+cel:david_duchovny dc:title "David Duchovny" .
+
+cel:matt_dillon dc:title "Matt Dillon" .
+
+cel:joaquin_phoenix dc:title "Joaquin Phoenix" .
+
+cel:kelly_slater dc:title "Kelly Slater" .
+
+cel:pamela_anderson dc:title "Pamela Anderson" .
+
+cel:stephen_tredre dc:title "Stephen Tredre" .
+
+cel:jessica_simpson dc:title "Jessica Simpson" .
+
+cel:sinitta_malone dc:title "Sinitta" .
+
+cel:penn_badgley dc:title "Penn Badgley" .
+
+cel:candy_samples dc:title "Candy Samples" .
+
+cel:paul_dinello dc:title "Paul Dinello" .
+
+cel:judith_exner dc:title "Judith Exner" .
+
+cel:greg_laswell dc:title "Greg Laswell" .
+
+cel:frank_sinatra dc:title "Frank Sinatra" .
+
+cel:sherilyn_fenn dc:title "Sherilyn Fenn" .
+
+cel:leslie_caron dc:title "Leslie Caron" .
+
+cel:flavio_briatore dc:title "Flavio Briatore" .
+
+cel:angie_everhart dc:title "Angie Everhart" .
+
+cel:20044548 dc:title "Kick Gurry" .
+
+cel:ryan_cabrera dc:title "Ryan Cabrera" .
+
+cel:leonardo_dicaprio dc:title "Leonardo DiCaprio" .
+
+cel:brooke_burke dc:title "Brooke Burke" .
+
+cel:mariah_carey dc:title "Mariah Carey" .
+
+cel:jenna_jameson dc:title "Jenna Jameson" .
+
+cel:suze_rotolo dc:title "Suze Rotolo" .
+
+cel:bob_dylan dc:title "Bob Dylan" .
+
+cel:shalane_mccall dc:title "Shalane McCall" .
+
+cel:zach_braff dc:title "Zach Braff" .
+
+cel:jessica_biel dc:title "Jessica Biel" .
+
+cel:dave_grohl dc:title "Dave Grohl" .
+
+cel:kate_moss dc:title "Kate Moss" .
+
+cel:jamie_hince dc:title "Jamie Hince" .
+
+cel:luis_miguel dc:title "Luis Miguel" .
+
+cel:robbie_williams dc:title "Robbie Williams" .
+
+cel:chris_noth dc:title "Chris Noth" .
+
+cel:nicole_richie dc:title "Nicole Richie" .
+
+cel:sarah_jessica_parker dc:title "Sarah Jessica Parker" .
+
+cel:robert_downey_jr dc:title "Robert Downey Jr." .
+
+cel:halle_berry dc:title "Halle Berry" .
+
+cel:michael_phelps dc:title "Michael Phelps" .
+
+cel:josh_henderson dc:title "Josh Henderson" .
+
+cel:paul_westerberg dc:title "Paul Westerberg" .
+
+cel:carlos_leon dc:title "Carlos Leon" .
+
+cel:tom_werner dc:title "Tom Werner" .
+
+cel:antinous dc:title "Antinous" .
+
+cel:liv_tyler dc:title "Liv Tyler" .
+
+cel:john_singleton dc:title "John Singleton" .
+
+cel:alyssa_milano dc:title "Alyssa Milano" .
+
+cel:tony_kanal dc:title "Tony Ashwin Kanal" .
+
+cel:amy_sedaris dc:title "Amy Sedaris" .
+
+cel:jane_fonda dc:title "Jane Fonda" .
+
+cel:luke_wilson dc:title "Luke Wilson" .
+
+cel:miley_cyrus dc:title "Miley Cyrus" .
+
+cel:peter_doherty_1913 dc:title "Peter Doherty" .
+
+cel:beck dc:title "Beck" .
+
+cel:chris_botti dc:title "Chris Botti" .
+
+cel:jules_sandeau dc:title "Jules Sandeau" .
+
+cel:emma_heming dc:title "Emma Heming" .
+
+cel:bruce_willis dc:title "Bruce Willis" .
+
+cel:blake_sennett dc:title "Blake Sennett" .
+
+cel:helena_bonham_carter dc:title "Helena Bonham Carter" .
+
+cel:jenny_shimizu dc:title "Jenny Shimizu" .
+
+cel:angelina_jolie dc:title "Angelina Jolie" .
+
+cel:gregory_smith dc:title "Gregory Smith" .
+
+cel:misty_dawn dc:title "Misty Dawn" .
+
+cel:jill_schoelen dc:title "Jill Schoelen" .
+
+cel:vanilla_ice dc:title "Vanilla Ice" .
+
+cel:uma_thurman dc:title "Uma Thurman" .
+
+cel:christian_slater dc:title "Christian Slater" .
+
+cel:shana_wall dc:title "Shana Wall" .
+
+cel:ryan_seacrest dc:title "Ryan Seacrest" .
+
+cel:lance_armstrong dc:title "Lance Armstrong" .
+
+cel:jakob_dylan dc:title "Jakob Dylan" .
+
+cel:niki_taylor dc:title "Niki Taylor" .
+
+cel:jenny_mccarthy dc:title "Jenny McCarthy" .
+
+cel:jim_carrey dc:title "Jim Carrey" .
+
+cel:reese_witherspoon dc:title "Reese Witherspoon" .
+
+cel:adam_duritz dc:title "Adam Duritz" .
+
+cel:john_mayer dc:title "John Mayer" .
+
+cel:kate_hudson dc:title "Kate Hudson" .
+
+cel:cher dc:title "Cher" .
+
+cel:tyra_banks dc:title "Tyra Banks" .
+
+cel:chris_webber dc:title "Chris Webber" .
+
+cel:devendra_banhart dc:title "Devendra Banhart" .
+
+cel:vince_vaughn dc:title "Vince Vaughn" .
+
+cel:tony_ward dc:title "Tony Ward" .
+
+cel:ben_lee dc:title "Ben Lee" .
+
+cel:jenny_lewis dc:title "Jenny Lewis" .
+
+cel:candice_bergen dc:title "Candice Bergen" .
+
+cel:tate_donovan dc:title "Tate Donovan" .
+
+cel:samantha_ronson dc:title "Samantha Ronson" .
+
+cel:britt_ekland dc:title "Britt Ekland" .
+
+cel:natalie_portman dc:title "Natalie Portman" .
+
+cel:pete_yorn dc:title "Pete Yorn" .
+
+cel:joan_baez dc:title "Joan Baez" .
+
+cel:joel_madden dc:title "Joel Madden" .
+
+cel:catherine_deneuve dc:title "Catherine Deneuve" .
+
+cel:paula_profit dc:title "Paula Profit" .
+
+cel:james_hewitt dc:title "James Hewitt" .
+
+cel:jeffrey_dean_morgan dc:title "Jeffrey Dean Morgan" .
+
+cel:frank_gannon dc:title "Frank Gannon" .
+
+cel:tito_ortiz dc:title "Tito Ortiz" .
+
+cel:carol_leifer dc:title "Carol Leifer" .
+
+cel:bret_michaels dc:title "Bret Michaels" .
+
+cel:matt_damon dc:title "Matt Damon" .
+
+cel:orlando_bloom dc:title "Orlando Bloom" .
+
+cel:brett_ratner dc:title "Brett Ratner" .
+
+cel:britney_spears dc:title "Britney Spears" .
+
+cel:fred_durst dc:title "Fred Durst" .
+
+cel:tamara_witmer dc:title "Tamara Witmer" .
+
+cel:minnie_driver dc:title "Minnie Driver" .
+
+cel:john_f_kennedy dc:title "John F. Kennedy" .
+
+cel:amanda_peet dc:title "Amanda Peet" .
+
+cel:john_cusack dc:title "John Cusack" .
+
+cel:desiree_cousteau dc:title "Desireé Cousteau" .
+
+cel:tom_brady dc:title "Tom Brady" .
+
+cel:bridget_moynahan dc:title "Bridget Moynahan" .
+
+cel:eliot_spitzer dc:title "Eliot Spitzer" .
+
+cel:carly_simon dc:title "Carly Simon" .
+
+cel:hugh_laurie dc:title "Hugh Laurie" .
+
+cel:emma_thompson dc:title "Emma Thompson" .
+
+cel:carrie_underwood dc:title "Carrie Underwood" .
+
+cel:christina_ricci dc:title "Christina Ricci" .
+
+cel:jamie_dornan dc:title "Jamie Dornan" .
+
+cel:milo_ventimiglia dc:title "Milo Ventimiglia" .
+
+cel:mark_kamins dc:title "Mark Kamins" .
+
+cel:ray_j dc:title "Ray J" .
+
+cel:kendra_wilkinson dc:title "Kendra Wilkinson" .
+
+cel:nick_jonas dc:title "Nick Jonas" .
+
+cel:odessa_whitmire dc:title "Odessa Whitmire" .
+
+cel:jimmy_reyes dc:title "Jimmy Reyes" .
+
+cel:george_gargurevich dc:title "George Gargurevich" .
+
+cel:adam_goldberg dc:title "Adam Goldberg" .
+
+cel:braxton_olita dc:title "Braxton Olita" .
+
+cel:kenneth_branagh dc:title "Kenneth Branagh" .
+
+cel:rich_cronin dc:title "Rich Cronin" .
+
+cel:mia_farrow dc:title "Mia Farrow" .
+
+cel:minka_kelly dc:title "Minka Kelly" .
+
+cel:simon_cowell dc:title "Simon Cowell" .
+
+cel:david_furnish dc:title "David Furnish" .
+
+cel:jefferson_hack dc:title "Jefferson Hack" .
+
+cel:beyonce dc:title "Beyoncé" .
+
+cel:jean-michel_basquiat dc:title "Jean-Michel Basquiat" .
+
+cel:andy_roddick dc:title "Andy Roddick" .
+
+cel:chris_raab dc:title "Chris Raab" .
+
+cel:zac_efron dc:title "Zac Efron" .
+
+cel:jay-z dc:title "Jay-Z" .
+
+cel:stacey_nelkin dc:title "Stacey Nelkin" .
+
+cel:jason_wahler dc:title "Jason Wahler" .
+
+cel:paul_sculfor dc:title "Paul Sculfor" .
+
+cel:jason_kay dc:title "Jason Kay" .
+
+cel:joshua_kadison dc:title "Joshua Kadison" .
+
+cel:ryan_adams dc:title "Ryan Adams" .
+
+cel:leigh_taylor-young dc:title "Leigh Taylor-Young" .

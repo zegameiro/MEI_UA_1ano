@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    {% if error %}
+        <p>ERRO: Insira informação pedida</p>
+    {% endif %}
+
+    <form action="." method="post">
+        {% csrf_token %}
+        <p>Peso: <input type="number" name="peso" /></p>
+        <p>Altura: <input type="number" name="altura" /></p>
+        <p><input type="submit" value="Enviar"></p>
+    </form>
+
+{% endblock %}

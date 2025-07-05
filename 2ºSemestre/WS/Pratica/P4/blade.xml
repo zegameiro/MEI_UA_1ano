@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:ent="http://mydata.com/ent/"
+         xmlns:pred="http://mydata.com/pred/">
+
+  <rdf:Description rdf:about="http://mydata.com/ent/blade_runner">
+    <pred:name>Blade Runner</pred:name>
+    <pred:directed_by rdf:resource="http://mydata.com/ent/ridley_scott"/>
+    <pred:starring rdf:resource="http://mydata.com/ent/rutger_hauer"/>
+    <pred:starring rdf:resource="http://mydata.com/ent/daryl_hannah"/>
+    <pred:starring rdf:resource="http://mydata.com/ent/guid_9202a8c04000641f80000000054cbccc"/>
+    <pred:starring rdf:resource="http://mydata.com/ent/guid_9202a8c04000641f800000000042a461"/>
+    <pred:starring rdf:resource="http://mydata.com/ent/james_hong"/>
+    <pred:starring rdf:resource="http://mydata.com/ent/brion_james"/>
+    <pred:starring rdf:resource="http://mydata.com/ent/joe_turkel"/>
+    <pred:starring rdf:resource="http://mydata.com/ent/sean_young"/>
+    <pred:starring rdf:resource="http://mydata.com/ent/joanna_cassidy"/>
+    <pred:starring rdf:resource="http://mydata.com/ent/harrison_ford"/>
+    <pred:starring rdf:resource="http://mydata.com/ent/edward_james_olmos"/>
+    <pred:starring rdf:resource="http://mydata.com/ent/william_sanderson"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://mydata.com/ent/ridley_scott">
+    <pred:name>Ridley Scott</pred:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mydata.com/ent/daryl_hannah">
+    <pred:name>Daryl Hannah</pred:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mydata.com/ent/harrison_ford">
+    <pred:name>Harrison Ford</pred:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mydata.com/ent/rutger_hauer">
+    <pred:name>Rutger Hauer</pred:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mydata.com/ent/guid_9202a8c04000641f800000000042a461">
+    <pred:name>M. Emmet Walsh</pred:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mydata.com/ent/sean_young">
+    <pred:name>Sean Young</pred:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mydata.com/ent/james_hong">
+    <pred:name>James Hong</pred:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mydata.com/ent/brion_james">
+    <pred:name>Brion James</pred:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mydata.com/ent/joanna_cassidy">
+    <pred:name>Joanna Cassidy</pred:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mydata.com/ent/edward_james_olmos">
+    <pred:name>Edward James Olmos</pred:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mydata.com/ent/joe_turkel">
+    <pred:name>Joe Turkel</pred:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mydata.com/ent/william_sanderson">
+    <pred:name>William Sanderson</pred:name>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mydata.com/ent/guid_9202a8c04000641f80000000054cbccc">
+    <pred:name>Morgan Paull</pred:name>
+  </rdf:Description>
+
+</rdf:RDF>

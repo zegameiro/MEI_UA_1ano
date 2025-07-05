@@ -1,0 +1,31 @@
+@prefix ent: <http://mydata.com/ent/> .
+@prefix pred: <http://mydata.com/pred/> .
+
+ent:blade_runner pred:name "Blade Runner" ;
+    pred:directed_by ent:ridley_scott ;
+    pred:starring ent:rutger_hauer ,
+                  ent:daryl_hannah ,
+                  ent:guid_9202a8c04000641f80000000054cbccc ,
+                  ent:guid_9202a8c04000641f800000000042a461 ,
+                  ent:james_hong ,
+                  ent:brion_james ,
+                  ent:joe_turkel ,
+                  ent:sean_young ,
+                  ent:joanna_cassidy ,
+                  ent:harrison_ford ,
+                  ent:edward_james_olmos ,
+                  ent:william_sanderson .
+
+ent:ridley_scott pred:name "Ridley Scott" .
+ent:daryl_hannah pred:name "Daryl Hannah" .
+ent:harrison_ford pred:name "Harrison Ford" .
+ent:rutger_hauer pred:name "Rutger Hauer" .
+ent:guid_9202a8c04000641f800000000042a461 pred:name "M. Emmet Walsh" .
+ent:sean_young pred:name "Sean Young" .
+ent:james_hong pred:name "James Hong" .
+ent:brion_james pred:name "Brion James" .
+ent:joanna_cassidy pred:name "Joanna Cassidy" .
+ent:edward_james_olmos pred:name "Edward James Olmos" .
+ent:joe_turkel pred:name "Joe Turkel" .
+ent:william_sanderson pred:name "William Sanderson" .
+ent:guid_9202a8c04000641f80000000054cbccc pred:name "Morgan Paull" .

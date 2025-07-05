@@ -1,0 +1,26 @@
+<http://mydata.com/ent/en/blade_runner> <http://mydata.com/pred/name> "Blade Runner" .
+<http://mydata.com/ent/en/blade_runner> <http://mydata.com/pred/directed_by> <http://mydata.com/en/ridley_scott> .
+<http://mydata.com/ent/en/blade_runner> <http://mydata.com/pred/starring> <http://mydata.com/ent/en/rutger_hauer> .
+<http://mydata.com/ent/en/blade_runner> <http://mydata.com/pred/starring> <http://mydata.com/guid/9202a8c04000641f80000000054cbccc> .
+<http://mydata.com/ent/en/blade_runner> <http://mydata.com/pred/starring> <http://mydata.com/guid/9202a8c04000641f800000000042a461> .
+<http://mydata.com/ent/en/blade_runner> <http://mydata.com/pred/starring> <http://mydata.com/ent/en/james_hong> .
+<http://mydata.com/ent/en/blade_runner> <http://mydata.com/pred/starring> <http://mydata.com/ent/en/brion_james> .
+<http://mydata.com/ent/en/blade_runner> <http://mydata.com/pred/starring> <http://mydata.com/ent/en/joe_turkel> .
+<http://mydata.com/ent/en/blade_runner> <http://mydata.com/pred/starring> <http://mydata.com/ent/en/sean_young> .
+<http://mydata.com/ent/en/blade_runner> <http://mydata.com/pred/starring> <http://mydata.com/ent/en/joanna_cassidy> .
+<http://mydata.com/ent/en/blade_runner> <http://mydata.com/pred/starring> <http://mydata.com/ent/en/harrison_ford> .
+<http://mydata.com/ent/en/blade_runner> <http://mydata.com/pred/starring> <http://mydata.com/ent/en/edward_james_olmos> .
+<http://mydata.com/ent/en/blade_runner> <http://mydata.com/pred/starring> <http://mydata.com/ent/en/william_sanderson> .
+<http://mydata.com/ent/ridley_scott> <http://mydata.com/pred/name> "Ridley Scott" .
+<http://mydata.com/ent/daryl_hannah> <http://mydata.com/pred/name> "Daryl Hannah" .
+<http://mydata.com/ent/harrison_ford> <http://mydata.com/pred/name> "Harrison Ford" .
+<http://mydata.com/ent/rutger_hauer> <http://mydata.com/pred/name> "Rutger Hauer" .
+<http://mydata.com/ent/guid/9202a8c04000641f800000000042a461> <http://mydata.com/pred/name> "M. Emmet Walsh" .
+<http://mydata.com/ent/sean_young> <http://mydata.com/pred/name> "Sean Young" .
+<http://mydata.com/ent/james_hong> <http://mydata.com/pred/name> "James Hong" .
+<http://mydata.com/ent/brion_james> <http://mydata.com/pred/name> "Brion James" .
+<http://mydata.com/ent/joanna_cassidy> <http://mydata.com/pred/name> "Joanna Cassidy" .
+<http://mydata.com/ent/edward_james_olmos> <http://mydata.com/pred/name> "Edward James Olmos" .
+<http://mydata.com/ent/joe_turkel> <http://mydata.com/pred/name> "Joe Turkel" .
+<http://mydata.com/ent/william_sanderson> <http://mydata.com/pred/name> "William Sanderson" .
+<http://mydata.com/ent/guid/9202a8c04000641f80000000054cbccc> <http://mydata.com/pred/name> "Morgan Paull" .

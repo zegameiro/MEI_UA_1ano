@@ -1,0 +1,34 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+
+@prefix celp: <http://mydata.com/celp/> .
+@prefix celc: <http://mydata.com/celc/> .
+
+celc:Celebrity rdf:type rdfs:Class .
+celc:Celebrity rdfs:subClassOf foaf:Person .
+
+celc:Relationship rdf:type rdfs:Class .
+celc:Relationship rdfs:subClassOf foaf:Group .
+
+dc:title rdfs:subPropertyOf foaf:name .
+
+dc:title rdf:type rdf:Property ;
+    rdfs:domain celc:Celebrity ;
+    rdfs:range rdfs:Literal .
+
+celp:start rdfs:subPropertyOf celp:limit .
+celp:end rdfs:subPropertyOf celp:limit .
+
+celp:with rdf:type rdf:Property ;
+    rdfs:domain celc:Relationship ;
+    rdfs:range celc:Celebrity .
+
+celp:start rdf:type rdf:Property ;
+    rdfs:domain celc:Relationship ;
+    rdfs:range rdfs:Literal .
+
+celp:end rdf:type rdf:Property ;
+    rdfs:domain celc:Relationship ;
+    rdfs:range rdfs:Literal .
