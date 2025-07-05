@@ -1,4 +1,4 @@
-# First Assignment for the class Semantic Web 2024/2025
+# Primeiro Projeto Prático para a cadeira de Web Semântica 2024/2025
 
 ## Nota: 15
 
