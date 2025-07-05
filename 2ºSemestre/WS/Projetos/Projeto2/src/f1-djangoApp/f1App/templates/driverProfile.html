@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="p-6">
+  {% if driver %}
+    <div class="flex flex-col justify-center items-center gap-10">
+      <h1 class="flex gap-2 items-center text-2xl font-semibold">
+        <i class="text-4xl"><!-- Add motorcycle helmet icon via <svg> or font-awesome --></i>
+        Driver Details
+      </h1>
+
+      <div id="card" class="h-card flex flex-col gap-4">
+        <!-- Personal Details Card -->
+        <div class="flex flex-col gap-10 border-2 border-error shadow-xl p-6 rounded-2xl">
+          <div class="flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Personal Details</h1>
+            <button class="btn btn-error" onclick="copySection()">Copy to Clipboard</button>
+          </div>
+          <div class="divider divider-error my-[-20px]"></div>
+          <div class="flex justify-around items-center w-full">
+            <div class="flex flex-col text-xl space-y-3">
+              {% if driver.fullName %}
+                <p class="flex gap-4">
+                  <span class="font-semibold">Full Name</span>
+                  <span class="p-given-name">{{ driver.fullName }}</span>
+                </p>
+              {% else %}
+                <p class="flex gap-4">
+                  <span class="font-semibold">First Name</span>
+                  <span class="p-given-name">{{ driver.forename }}</span>
+                </p>
+                <p class="flex gap-4">
+                  <span class="font-semibold">Last Name</span>
+                  <span class="p-family-name">{{ driver.surname }}</span>
+                </p>
+              {% endif %}
+              <p class="flex gap-4">
+                <span class="font-semibold">Date of Birth</span>
+                <span class="p-bday">{{ driver.dob }}</span>
+              </p>
+
+              {% if driver.code %}
+                <span class="flex gap-4">
+                  <strong>Code</strong> <span class="p-code">{{ driver.code }}</span>
+                </span>
+              {% endif %}
+
+              {% if driver.number %}
+                <span class="flex gap-4">
+                  <strong>Number</strong> <span class="p-number">{{ driver.number }}</span>
+                </span>
+              {% endif %}
+
+              <a
+                class="u-url badge badge-soft badge-primary text-lg"
+                target="_blank"
+                href="{{ driver.url }}"
+              >
+                {{ driver.url }}
+              </a>
+            </div>
+
+            <div class="divider divider-horizontal"></div>
+
+            <div class="card bg-base-100 border-2 h-[100%] border-white shadow-sm w-max p-1">
+              {% if driver.image %}
+                <div class="flex justify-center">
+                  <img src="{{ driver.image }}" alt="Driver Image" width="180" class="rounded-sm object-cover">
+                </div>
+              {% endif %}
+            </div>
+
+            <div class="divider divider-horizontal"></div>
+
+            <div class="card bg-base-100 border-2 h-[100%] border-white shadow-sm w-max p-1">
+              <figure>
+                <img
+                  class="h-20 w-20"
+                  src="{{flag}}"
+                  />
+              </figure>
+              <div class="card-body">
+                <h2 class="p-category text-xl text-center justify-center">
+                  {{ driver.nationality }}
+                </h2>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Wins Section -->
+        <div class="card gap-10 items-center border-2 border-error shadow-xl p-2 rounded-2xl">
+          <div class="card-body">
+            <h1 class="card-title text-2xl">Races Won</h1>
+            <div class="divider divider-error"></div>
+
+            {% if wins %}
+              <div class="h-feed grid grid-cols-3 gap-y-6 gap-x-6 overflow-y-auto w-full max-h-[30rem]">
+                {% for win in wins %}
+                  <a
+                    class="h-event duration-200 transition hover:scale-90"
+                    href="{% url "race_profile" win.id %}" 
+                  >
+                    <div class="flex flex-col items-center text-warning text-xl border-2 border-warning p-2 space-y-2 rounded-lg">
+                      <span class="p-name badge badge-warning text-xl">
+                        {{ win.raceName }}
+                      </span>
+                      <time class="dt-start" datetime="{{ win.raceYear }}">
+                        {{ win.raceYear }}
+                      </time>
+                      <span class="flex items-center gap-1">
+                        <i class="icon-trophy"></i> <span class="p-points">Points {{ win.points }}</span>
+                      </span>
+                    </div>
+                  </a>
+                {% endfor %}
+              </div>
+            {% else %}
+              <div class="flex gap-1 items-center text-xl text-warning">
+                <i class="icon-sad"></i> This driver doesn't have any wins yet
+              </div>
+            {% endif %}
+          </div>
+        </div>
+        <!-- Constructors Section -->
+         <div class="card gap-10 items-center border-2 border-error shadow-xl p-2 rounded-2xl">
+          <div class="card-body w-full">
+            <h1 class="card-title text-2xl">Constructors Participated</h1>
+            <div class="divider divider-error"></div>
+
+            {% if driver.constructors %}
+              <div class="h-feed grid grid-cols-3 gap-y-6 gap-x-6 overflow-y-auto w-full max-h-[30rem]">
+                {% for constructors in driver.constructors %}
+                    <div class="h-constructor flex flex-col items-center text-warning text-xl border-2 border-warning p-2 space-y-2 rounded-lg">
+                      <span class="p-name badge badge-warning text-xl">
+                        {{ constructors.name }}
+                      </span>
+                      <time class="dt-year" datetime="{{ constructors.year }}">
+                        {{ constructors.year }}
+                      </time>
+                    </div>
+                {% endfor %}
+              </div>
+            {% else %}
+              <div class="flex gap-1 items-center text-xl text-warning">
+                <i class="icon-sad"></i> No Information yet
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  {% else %}
+    <h1 class="text-4xl">No data found</h1>
+  {% endif %}
+</div>
+<script>
+  function copySection() {
+    const content = document.getElementById("card").outerHTML;  // get HTML with tags/classes
+    navigator.clipboard.writeText(content)
+      .then(() => alert("Copied!"))
+      .catch(err => alert("Failed to copy: " + err));
+  }
+</script>
+{% endblock %}

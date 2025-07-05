@@ -1,0 +1,10 @@
+services:
+  
+  graphDB:
+    image: ontotext/graphdb:10.8.3
+    container_name: GraphDB
+    hostname: graphdb
+    ports:
+      - 7200:7200
+    volumes:
+      - ./graphdb:/opt/graphdb/home/data
