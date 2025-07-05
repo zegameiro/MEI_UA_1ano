@@ -4,6 +4,8 @@ The goal of this assignment is convert the weather-stations and word-count exerc
 
 Your solution should be implemented in C++ using MPI (e.g., MPICH), and must support execution across multiple processes.
 
+## Grade: 14.50
+
 ## Requirements
 
 1. **Distributed** Task Pool:
