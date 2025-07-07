@@ -1,0 +1,31 @@
+
+services:
+  client:
+    build:
+      context: ./client
+      dockerfile: ./.docker/Dockerfile.prod
+    image: registry.deti/g11-bytebazaar/ecom-frontend:v2.20
+
+  api:
+    build:
+      context: .
+      dockerfile: ./API/.docker/Dockerfile.prod
+    image: registry.deti/g11-bytebazaar/ecom-backend:v2.9
+
+  cdn:
+    build:
+      context: .
+      dockerfile: ./cdn/.docker/Dockerfile.prod
+    image: registry.deti/g11-bytebazaar/ecom-cdn:v2.8
+
+  budibase:
+    build: 
+      context: ./budibase/.docker
+      dockerfile: Dockerfile.prod
+    image: registry.deti/g11-bytebazaar/ecom-budibase:1.1
+
+  upload-server:
+    build:
+      context: ./upload-server
+      dockerfile: Dockerfile.prod
+    image: registry.deti/g11-bytebazaar/ecom-upload-server:1.6

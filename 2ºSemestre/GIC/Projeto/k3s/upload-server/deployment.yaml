@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: upload-server-deployment
+  namespace: g11-bytebazaar
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: upload-server
+  template:
+    metadata:
+      labels:
+        app: upload-server
+    spec:
+      containers:
+        - name: upload-server
+          image: registry.deti/g11-bytebazaar/ecom-upload-server:1.6
+          ports:
+            - containerPort: 3005
+          envFrom:
+          - secretRef:
+              name: minio-credentials
+          - configMapRef:
+              name: uploader-config
+          resources:
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: upload-server-service
+  namespace: g11-bytebazaar
+  labels:
+    app: upload-server
+spec:
+  selector:
+    app: upload-server
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3005
+  type: ClusterIP

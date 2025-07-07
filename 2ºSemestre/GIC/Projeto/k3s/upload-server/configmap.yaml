@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: uploader-config
+  namespace: g11-bytebazaar
+data:
+  MINIO_ENDPOINT: "minio-api.cdn.svc.cluster.local"
+  MINIO_PORT: "9000"
+  MINIO_USESSL: "false"
+  MINIO_BUCKET: "bytebazaar"
+  APP_PORT: "3005"
+  CDN_BASE_URL: "http://cdn.deti"

@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-config
+  namespace: g11-bytebazaar
+  labels:
+    app: mysql
+    app.kubernetes.io/name: mysql
+data:
+  primary.cnf: |
+    # Apply this config only on the primary.
+    [mysqld]
+    log-bin    
+    gtid_mode=ON
+    enforce_gtid_consistency=ON
+    log_slave_updates=ON
+
+  replica.cnf: |
+    # Apply this config only on replicas.
+    [mysqld]
+    super-read-only
+    replicate-ignore-db=mysql
+    gtid_mode=ON
+    enforce_gtid_consistency=ON
+    log_slave_updates=ON

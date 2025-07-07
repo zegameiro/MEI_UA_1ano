@@ -1,0 +1,26 @@
+[
+  {
+      "Id": 1,
+      "Name": "Smartphones"
+  },
+  {
+      "Id": 2,
+      "Name": "Laptops"
+  },
+  {
+      "Id": 3,
+      "Name": "Processors"
+  },
+  {
+      "Id": 4,
+      "Name": "Graphics Cards"
+  },
+  {
+      "Id": 5,
+      "Name": "Gaming Consoles"
+  },
+  {
+      "Id": 6,
+      "Name": "Tablets"
+  }
+]

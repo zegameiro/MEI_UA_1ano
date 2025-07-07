@@ -1,0 +1,159 @@
+services:
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_ecommerce
+    restart: always
+
+    env_file: .env
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+
+    ports:
+      - "3306:3306"
+
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      start_period: 10s
+      interval: 5s
+      timeout: 10s
+      retries: 5
+
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  redis:
+    image: redis:7.2
+
+    ports:
+      - 6379:6379
+
+    command: ["redis-server", "--appendonly", "yes"]
+
+    volumes:
+      - redis-data:/data
+
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  webclient:
+
+    build: 
+      context: ./client
+      dockerfile: ./.docker/Dockerfile
+
+    container_name: client_app
+    ports:
+      - "4200:4200"
+
+    volumes:
+      - ./client:/client
+      - /client/node_modules
+
+    depends_on:
+      api:
+        condition: service_healthy
+      cdn:
+        condition: service_healthy
+
+  api:
+    build: 
+      context: .
+      dockerfile: ./API/.docker/Dockerfile
+
+    container_name: dotnet_api
+
+    volumes:
+      - .:/app
+
+    ports:
+      - "5000:5000"
+      - "5001:5001"
+
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+    env_file: .env
+
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+    environment:
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+      - MYSQL_HOST=${MYSQL_HOST}
+      - MYSQL_PORT=${MYSQL_PORT}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - CACHE_PORT=${CACHE_PORT}
+      - CACHE_HOST=${CACHE_HOST}
+      - TOKEN_SECRET_KEY=${TOKEN_SECRET_KEY}
+      - TOKEN_ISSUER=${TOKEN_ISSUER}
+      - API_URL=${API_URL}
+      - CDN_URL=${CDN_URL}
+      - SEED_DATA_PATH=${SEED_DATA_PATH}
+      - ALLOWED_HOST=${ALLOWED_HOST}
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+
+  cdn:
+
+    depends_on:
+      api:
+        condition: service_healthy
+    
+    build:
+      context: .
+      dockerfile: ./cdn/.docker/Dockerfile
+    
+    ports:
+      - "80:80"
+    volumes:
+      - cdn_products:/usr/share/nginx/html/products
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/cdn-health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3  
+      
+  budibase:
+    image: budibase/budibase:latest
+    container_name: budibase
+    restart: unless-stopped
+    ports:
+      - "10000:80"
+    environment:
+      JWT_SECRET: ${TOKEN_SECRET_KEY}
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
+      REDIS_PASSWORD: ""
+      COUCHDB_USER: admin
+      COUCHDB_PASSWORD: admin
+      INTERNAL_API_KEY: budibase-key
+    volumes:
+      - budibase_data:/data
+
+  upload-server:
+    build:
+      context: ./upload-server
+    ports:
+      - "3005:3005"
+    volumes:
+      - cdn_products:/uploads
+
+volumes:
+  mysql-data:
+  redis-data:
+  budibase_data:
+  cdn_products:

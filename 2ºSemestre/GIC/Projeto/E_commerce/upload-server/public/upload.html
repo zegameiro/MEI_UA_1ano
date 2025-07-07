@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <title>Upload de Imagem</title>
+  <style>
+    body { font-family: sans-serif; margin: 20px; }
+    input, button { margin-bottom: 10px; padding: 8px; border-radius: 4px; border: 1px solid #ccc; }
+    button { cursor: pointer; background-color: #007bff; color: white; border: none; }
+    button:hover { background-color: #0056b3; }
+    #urlOutput { width: 400px; background-color: #f0f0f0; }
+    #status { color: #333; }
+  </style>
+</head>
+<body>
+  <h3>Upload de imagem para CDN</h3>
+  <input type="file" id="fileInput" />
+  <button onclick="upload()">Upload</button>
+  <p id="status"></p>
+  <input type="text" id="urlOutput" style="width: 300px;" readonly />
+  <button onclick="copyURL()">📋 Copiar</button>
+
+  <script>
+    async function upload() {
+      const file = document.getElementById("fileInput").files[0];
+      const status = document.getElementById("status");
+      const urlOutput = document.getElementById("urlOutput");
+
+      status.textContent = ""; // Clear previous status
+      urlOutput.value = "";    // Clear previous URL
+
+      if (!file) {
+        status.textContent = "⚠️ Select a file.";
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("file", file);
+
+      try {
+        const res = await fetch("/upload", {
+          method: "POST",
+          body: formData,
+        });
+
+        if (!res.ok) {
+          const errorText = await res.text();
+          throw new Error(`Server error: ${res.status} - ${errorText}`);
+        }
+
+        const data = await res.json();
+        const fullUrl = data.fullCdnUrl;
+
+        status.textContent = "✅ Upload made with Success!";
+        urlOutput.value = fullUrl;
+      } catch (err) {
+        status.textContent = "❌ ERROR: " + err.message;
+        console.error("Upload error:", err);
+      }
+    }
+
+    function copyURL() {
+      const urlOutput = document.getElementById("urlOutput");
+      urlOutput.select();
+      document.execCommand("copy");
+      status.textContent = "📋 URL copied to clipboard!";
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus
+  namespace: g11-bytebazaar
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus
+  template:
+    metadata:
+      labels:
+        app: prometheus
+    spec:
+      containers:
+      - name: prometheus
+        image: prom/prometheus:v2.52.0
+        args:
+          - "--config.file=/etc/prometheus/prometheus.yml"
+          - "--storage.tsdb.retention.time=15d"
+          - "--web.enable-lifecycle"
+        ports:
+        - containerPort: 9090
+          name: web
+        volumeMounts:
+        - name: prometheus-config-vol
+          mountPath: /etc/prometheus
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "700m"
+          requests:
+            memory: "256Mi"
+            cpu: "450m"
+      volumes:
+      - name: prometheus-config-vol
+        configMap:
+          name: observability-configs
+          items:
+          - key: prometheus-config.yaml
+            path: prometheus.yml
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus
+  namespace: g11-bytebazaar
+spec:
+  ports:
+  - port: 9090
+    targetPort: 9090
+    name: web
+    protocol: TCP
+  selector:
+    app: prometheus
+  type: ClusterIP

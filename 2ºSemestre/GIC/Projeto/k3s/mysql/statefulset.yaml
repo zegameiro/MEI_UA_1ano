@@ -1,0 +1,320 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql
+  namespace: g11-bytebazaar
+spec:
+  serviceName: mysql
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mysql
+      app.kubernetes.io/name: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+        app.kubernetes.io/name: mysql
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: cpu
+                operator: In
+                values:
+                - x86-64-v2
+      securityContext:
+        fsGroup: 999
+      initContainers:
+        - name: init-mysql
+          image: mysql:8.0
+          command:
+            - bash
+            - "-c"
+            - |
+              set -ex
+              # Generate mysql server-id from pod ordinal index.
+              [[ $HOSTNAME =~ -([0-9]+)$ ]] || exit 1
+              ordinal=${BASH_REMATCH[1]}
+              echo [mysqld] > /mnt/conf.d/server-id.cnf
+              # Add an offset to avoid reserved server-id=0 value
+              echo server-id=$((100 + $ordinal)) >> /mnt/conf.d/server-id.cnf
+              # Copy apropriate conf.d files from config-map to emptyDir
+              if [[ $ordinal -eq 0 ]]; then
+                cp /mnt/config-map/primary.cnf /mnt/conf.d/
+              else
+                cp /mnt/config-map/replica.cnf /mnt/conf.d/
+              fi
+          volumeMounts:
+            - name: conf
+              mountPath: /mnt/conf.d
+            - name: config-map
+              mountPath: /mnt/config-map
+
+        - name: clone-mysql
+          image: percona/percona-xtrabackup:8.0.35-31
+          command:
+            - bash
+            - "-c"
+            - |
+              set -ex
+              # Skip the clone if data already exists
+              [[ -d /var/lib/mysql/mysql ]] && exit 0
+              # Skip the clone on primary (index 0)
+              ordinal=$(echo $HOSTNAME | grep -oE '[0-9]+$')
+              [[ -z "$ordinal" ]] && exit 1
+              [[ "$ordinal" -eq 0 ]] && exit 0
+              # Clone data from previous peer
+              socat -u TCP:mysql-$(($ordinal-1)).mysql:3307 - | xbstream -x -C /var/lib/mysql
+              # Prepare the backup
+              xtrabackup --prepare --target-dir=/var/lib/mysql
+              
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/mysql
+              subPath: mysql
+            - name: conf
+              mountPath: /etc/mysql/conf.d
+
+      containers:
+      - name: mysql
+        image: mysql:8.0
+
+        envFrom:
+        - secretRef:
+            name: mysql-secrets
+
+        ports:
+          - name: mysql
+            containerPort: 3306
+
+        volumeMounts:
+          - name: data
+            mountPath: /var/lib/mysql
+            subPath: mysql
+          - name: conf
+            mountPath: /etc/mysql/conf.d
+      
+        livenessProbe:
+          exec:
+            command: ["/bin/sh", "-c", "mysqladmin ping -h localhost -u root -p${MYSQL_ROOT_PASSWORD}"]
+          initialDelaySeconds: 60
+          periodSeconds: 20
+          timeoutSeconds: 5
+          failureThreshold: 3
+        
+        readinessProbe:
+          exec:
+            command: ["/bin/sh", "-c", "mysql -h localhost -u root -p${MYSQL_ROOT_PASSWORD} -e 'SELECT 1'"]
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 3
+          failureThreshold: 5
+
+        startupProbe:
+          exec:
+            command: ["/bin/sh", "-c", "mysqladmin ping -h localhost -u root -p${MYSQL_ROOT_PASSWORD}"]
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 20
+
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "500m"
+          limits:
+            memory: "1.5Gi"
+            cpu: "900m"
+
+      - name: xtrabackup
+        image: percona/percona-xtrabackup:8.0.35-31
+        ports:
+          - name: xtrabackup
+            containerPort: 3307
+        envFrom:
+          - secretRef:
+              name: mysql-secrets
+        command:
+          - bash
+          - "-c"
+          - |
+            set -ex
+            cd /var/lib/mysql
+
+            # We need to ensure the mysql server is ready before attempting any SQL commands
+            echo "Waiting for mysqld to be ready (accepting connections)"
+            until mysql -h 127.0.0.1 -u root -p$MYSQL_ROOT_PASSWORD -e "SELECT 1"; do sleep 1; done
+            echo "Mysqld is ready."
+
+            # Determine replication details from clone position
+            # This path is for when cloning from an existing replica (xtrabackup_slave_info)
+            if [[ -f xtrabackup_slave_info && "x$(<xtrabackup_slave_info)" != "x" ]]; then
+              echo "Initializing replication from xtrabackup_slave_info"
+
+              # Read the content of xtrabackup_slave_info
+              # It typically contains:
+              # SET GLOBAL gtid_purged='<uuid:interval>';
+              # CHANGE MASTER TO MASTER_AUTO_POSITION=1;
+              SLAVE_INFO_CONTENT=$(cat xtrabackup_slave_info)
+
+              # Extract the GTID purged statement
+              GTID_PURGED_STATEMENT=$(echo "$SLAVE_INFO_CONTENT" | grep "SET GLOBAL gtid_purged" | sed -E 's/;$//g' || true)
+
+              # Extract the CHANGE MASTER TO statement
+              CHANGE_MASTER_STATEMENT=$(echo "$SLAVE_INFO_CONTENT" | grep "CHANGE MASTER TO" | sed -E 's/;$//g' || true)
+
+              if [[ -z "$CHANGE_MASTER_STATEMENT" ]]; then
+                  echo "Error: 'CHANGE MASTER TO' statement not found in xtrabackup_slave_info."
+                  exit 1
+              fi
+
+              # Execute RESET REPLICA ALL
+              echo "Executing RESET REPLICA ALL;"
+              mysql -h 127.0.0.1 -u root -p$MYSQL_ROOT_PASSWORD -e "RESET REPLICA ALL;" || exit 1
+
+              # Execute SET GLOBAL gtid_purged if found
+              if [[ -n "$GTID_PURGED_STATEMENT" ]]; then
+                  echo "Executing GTID Purged statement: $GTID_PURGED_STATEMENT;"
+                  mysql -h 127.0.0.1 -u root -p$MYSQL_ROOT_PASSWORD -e "$GTID_PURGED_STATEMENT;" || exit 1
+              fi
+
+              # Modify the CHANGE MASTER TO statement and execute it
+              # Replace aliases and append connection details
+              FINAL_CHANGE_REPLICATION_SQL=$(echo "$CHANGE_MASTER_STATEMENT" | \
+                                               sed -e 's/CHANGE MASTER TO/CHANGE REPLICATION SOURCE TO/' \
+                                                   -e 's/MASTER_AUTO_POSITION/SOURCE_AUTO_POSITION/')
+
+              # Append the connection details, ensuring a comma is added if needed
+              if [[ "$FINAL_CHANGE_REPLICATION_SQL" != *"," ]]; then
+                FINAL_CHANGE_REPLICATION_SQL+=","
+              fi
+
+              FINAL_CHANGE_REPLICATION_SQL+=" SOURCE_HOST='mysql-0.mysql', \
+                                             SOURCE_USER='root', \
+                                             SOURCE_PASSWORD='${MYSQL_ROOT_PASSWORD}', \
+                                             SOURCE_CONNECT_RETRY=10;"
+
+              echo "Executing CHANGE REPLICATION SOURCE TO: $FINAL_CHANGE_REPLICATION_SQL"
+              mysql -h 127.0.0.1 -u root -p$MYSQL_ROOT_PASSWORD -e "$FINAL_CHANGE_REPLICATION_SQL" || exit 1
+
+              # Start the replica
+              echo "Executing START REPLICA;"
+              mysql -h 127.0.0.1 -u root -p$MYSQL_ROOT_PASSWORD -e "START REPLICA;" || exit 1
+
+              # Clean up the xtrabackup info files after successful setup
+              rm -f xtrabackup_slave_info xtrabackup_binlog_info change_replication_source_to.sql.in || true
+
+            # This path is for when cloning from a primary (xtrabackup_binlog_info)
+            elif [[ -f xtrabackup_binlog_info ]]; then
+              echo "Initializing replication from xtrabackup_binlog_info"
+              # Read log file, log position, and optional GTID set
+              read log_file log_pos gtid_set < xtrabackup_binlog_info
+              if [[ -z "$log_file" || -z "$log_pos" ]]; then
+                  echo "Failed to parse xtrabackup_binlog_info"
+                  exit 1
+              fi
+              rm -f xtrabackup_binlog_info xtrabackup_slave_info
+
+              # Start constructing the replication SQL
+              REPLICATION_SQL="RESET REPLICA ALL;"
+
+              # Decide between GTID auto-position or traditional binlog coordinates
+              if [[ -n "$gtid_set" ]]; then
+                  # If GTID set is present, use SOURCE_AUTO_POSITION=1
+                  REPLICATION_SQL+=" CHANGE REPLICATION SOURCE TO SOURCE_AUTO_POSITION=1, \
+                                    SOURCE_HOST='mysql-0.mysql', \
+                                    SOURCE_USER='root', \
+                                    SOURCE_PASSWORD='${MYSQL_ROOT_PASSWORD}', \
+                                    SOURCE_CONNECT_RETRY=10;"
+              else
+                  # Otherwise, use traditional log file and position
+                  REPLICATION_SQL+=" CHANGE REPLICATION SOURCE TO SOURCE_LOG_FILE='${log_file}', \
+                                    SOURCE_LOG_POS=${log_pos}, \
+                                    SOURCE_HOST='mysql-0.mysql', \
+                                    SOURCE_USER='root', \
+                                    SOURCE_PASSWORD='${MYSQL_ROOT_PASSWORD}', \
+                                    SOURCE_CONNECT_RETRY=10;"
+              fi
+
+              echo "Executing replication statement: $REPLICATION_SQL START REPLICA;"
+              mysql -h 127.0.0.1 -u root -p$MYSQL_ROOT_PASSWORD -e "$REPLICATION_SQL START REPLICA;" || exit 1
+
+            else
+                echo "No replication details (xtrabackup_slave_info or xtrabackup_binlog_info) found to initialize."
+                # If no replication details are found, it might be the primary (mysql-0) or an error.
+                # Only exit with error if it's not the primary.
+                ordinal=$(echo $HOSTNAME | grep -oE '[0-9]+$')
+                if [[ "$ordinal" -ne 0 ]]; then
+                    echo "Error: Not a primary node, but no replication info found. Exiting."
+                    exit 1
+                else
+                    echo "Primary node (mysql-0), no replication initialization needed here."
+                fi
+            fi
+
+            # Start a server to send backups when requested by peers.
+            exec socat TCP-LISTEN:3307,fork,reuseaddr,max-children=1,keepalive  \
+                        SYSTEM:"xtrabackup --backup --slave-info --safe-slave-backup --stream=xbstream \
+                        --host=127.0.0.1 --user=root --password=${MYSQL_ROOT_PASSWORD}"
+
+        volumeMounts:
+          - name: data
+            mountPath: /var/lib/mysql
+            subPath: mysql
+          - name: conf
+            mountPath: /etc/mysql/conf.d
+        resources:
+          requests:
+            memory: "500Mi"
+            cpu: "200m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+      volumes:
+        - name: conf
+          emptyDir: {}
+        - name: config-map
+          configMap:
+            name: mysql-config
+
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
+---
+# Headless service for stable DNS entries of StatefulSet members
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+  namespace: g11-bytebazaar
+  labels:
+    app: mysql
+    app.kubernetes.io/name: mysql
+spec:
+  clusterIP: None
+  selector:
+    app: mysql
+  ports:
+    - port: 3306
+      name: mysql
+---
+# Client service for connecting to any MySQL instance for reads.
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-read
+  namespace: g11-bytebazaar
+spec:
+  selector:
+    app: mysql
+  ports:
+    - port: 3306
+      name: mysql

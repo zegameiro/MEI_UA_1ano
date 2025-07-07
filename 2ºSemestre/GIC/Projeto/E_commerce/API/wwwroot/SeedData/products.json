@@ -1,0 +1,82 @@
+[
+  {
+      "Name": "iPhone 15 Pro",
+      "Description": "Apple's latest flagship smartphone with A17 Pro chip and titanium frame.",
+      "Price": 1099,
+      "PictureUrl": "iphone15pro.png",
+      "ProductTypeId": 1,
+      "ProductBrandId": 1
+  },
+  {
+      "Name": "Samsung Galaxy S24 Ultra",
+      "Description": "Samsung's most powerful phone with AI-powered camera and S-Pen support.",
+      "Price": 1299,
+      "PictureUrl": "galaxyS24.png",
+      "ProductTypeId": 1,
+      "ProductBrandId": 2
+  },
+  {
+      "Name": "MacBook Pro M3",
+      "Description": "Apple's high-performance laptop with M3 chip and 120Hz Liquid Retina XDR display.",
+      "Price": 1999,
+      "PictureUrl": "macbookproM3.png",
+      "ProductTypeId": 2,
+      "ProductBrandId": 1
+  },
+  {
+      "Name": "Dell XPS 15",
+      "Description": "A premium Windows laptop with Intel Core i9, 32GB RAM, and OLED display.",
+      "Price": 1899,
+      "PictureUrl": "dellXPS15.png",
+      "ProductTypeId": 2,
+      "ProductBrandId": 3
+  },
+  {
+      "Name": "AMD Ryzen 9 7950X",
+      "Description": "High-end desktop processor with 16 cores and 32 threads, perfect for gaming and productivity.",
+      "Price": 699,
+      "PictureUrl": "ryzen9.png",
+      "ProductTypeId": 3,
+      "ProductBrandId": 4
+  },
+  {
+      "Name": "Intel Core i9-14900K",
+      "Description": "Intel's flagship CPU with 24 cores and high overclocking potential.",
+      "Price": 729,
+      "PictureUrl": "intelI9.png",
+      "ProductTypeId": 3,
+      "ProductBrandId": 5
+  },
+  {
+      "Name": "NVIDIA GeForce RTX 4090",
+      "Description": "The most powerful gaming GPU with 24GB GDDR6X memory and ray tracing support.",
+      "Price": 1599,
+      "PictureUrl": "rtx4090.png",
+      "ProductTypeId": 4,
+      "ProductBrandId": 6
+  },
+  {
+      "Name": "PlayStation 5",
+      "Description": "Sony's latest gaming console with ultra-fast SSD and immersive 4K gaming.",
+      "Price": 499,
+      "PictureUrl": "ps5.png",
+      "ProductTypeId": 5,
+      "ProductBrandId": 7
+  },
+  {
+      "Name": "Xbox Series X",
+      "Description": "Microsoft's most powerful console with 12 TFLOPS of processing power.",
+      "Price": 499,
+      "PictureUrl": "xboxX.png",
+      "ProductTypeId": 5,
+      "ProductBrandId": 8
+  },
+  {
+      "Name": "Apple iPad Pro M2",
+      "Description": "A powerful tablet with M2 chip, ideal for professionals and creatives.",
+      "Price": 1199,
+      "PictureUrl": "ipadproM2.png",
+      "ProductTypeId": 6,
+      "ProductBrandId": 1
+  }
+]

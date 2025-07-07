@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: otel-collector
+  namespace: g11-bytebazaar
+  labels:
+    app: otel-collector
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: otel-collector
+  template:
+    metadata:
+      labels:
+        app: otel-collector
+    spec:
+      volumes:
+      - name: otel-collector-config-vol
+        configMap:
+          name: observability-configs
+          items:
+          - key: otel-collector-config.yaml
+            path: otel-collector-config.yaml
+      containers:
+      - name: otel-collector
+        image: otel/opentelemetry-collector-contrib:0.99.0
+        command: ["/otelcol-contrib"]
+        args: ["--config=/etc/otel-collector-config/otel-collector-config.yaml"]
+        resources:
+          limits:
+            memory: "150Mi"
+            cpu: "200m"
+          requests:
+            cpu: "100m"
+            memory: "150Mi"
+        ports:
+        - name: otlp-grpc
+          containerPort: 4317
+        - name: otlp-http
+          containerPort: 4318
+        - name: metrics
+          containerPort: 8889
+        volumeMounts:
+        - name: otel-collector-config-vol
+          mountPath: /etc/otel-collector-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: otel-collector
+  namespace: g11-bytebazaar
+  labels:
+    app: otel-collector
+spec:
+  selector:
+    app: otel-collector
+  ports:
+  - name: otlp-grpc
+    protocol: TCP
+    port: 4317
+    targetPort: 4317
+  - name: otlp-http
+    protocol: TCP
+    port: 4318
+    targetPort: 4318
+  - name: metrics
+    protocol: TCP
+    port: 8889
+    targetPort: 8889
+  type: ClusterIP
+
+

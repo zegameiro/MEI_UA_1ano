@@ -1,0 +1,1 @@
+FROM budibase/budibase:latest

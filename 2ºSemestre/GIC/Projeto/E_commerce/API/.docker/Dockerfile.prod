@@ -1,0 +1,26 @@
+# Stage 1: Build and publish
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+
+WORKDIR /src
+
+# Copy project files
+COPY API/*.csproj API/
+COPY Core/*.csproj Core/
+COPY Infrastructure/*.csproj Infrastructure/
+
+# Restore dependencies
+RUN dotnet restore API/API.csproj
+
+# Copy entire source and publish
+COPY . .
+RUN dotnet publish API/API.csproj -c Release -o /app/publish
+
+# Stage 2: Runtime
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
+
+WORKDIR /app
+
+COPY --from=build /app/publish .
+
+# Run the app
+ENTRYPOINT ["dotnet", "API.dll"]
