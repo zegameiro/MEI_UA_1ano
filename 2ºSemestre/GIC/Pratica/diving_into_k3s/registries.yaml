@@ -1,0 +1,9 @@
+# /etc/rancher/k3s/registries.yaml
+#
+# No need for TLS/HTTPS for the local registry
+# https://docs.k3s.io/installation/private-registry
+#
+mirrors:
+  registry.localhost:
+    endpoint:
+      - "http://registry.localhost:80"
